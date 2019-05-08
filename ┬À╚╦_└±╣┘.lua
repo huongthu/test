@@ -1,0 +1,1265 @@
+IncludeLib("SETTING")
+Include("\\script\\dailogsys\\dailogsay.lua")
+Include("\\script\\lib\\awardtemplet.lua")
+Include("\\script\\global\\fuyuan.lua")
+Include("\\script\\global\\hotrothem.lua")
+Include("\\script\\misc\\spreader\\spreader.lua")
+Include("\\script\\event\\bingo_machine\\bingo_machine_gs.lua")
+
+SKILL_180 = {1220,1221,1223,1222,1224,1225,1227,1226,1228,1229}
+local tbFaction =
+{
+	[1] =
+	{
+		szShowName = "ThiÕu L©m",
+		szFaction = "shaolin",
+		nShortFaction = "sl",
+		tbSkill = {318, 319, 321, 709, 1055, 1056, 1057},
+		tbEquip =
+		{
+			{
+				szFaction = "ThiÕu L©m QuyÒn",
+				nFirstEquipId = 4863,
+				tbEquipName =
+				{
+					" Minh Ph­îng ch©u liªn", " Minh Ph­îng t¨ng m·o", " Minh Ph­îng th­îng giíi", " Minh Ph­îng hé uyÓn", " Minh Ph­îng yªu ®¸i",
+					" Minh Ph­îng cµ sa ", " Minh Ph­îng triÒn thñ ", " Minh Ph­îng t¨ng hµi ", " Minh Ph­îng yªu trôy ", " Minh Ph­îng h¹ giíi ",
+				},
+			},
+			{
+				szFaction = "ThiÕu L©m C«n",
+				nFirstEquipId = 4873,
+				tbEquipName =
+				{
+					"Minh Ph­îng ch©u liªn", "Minh Ph­îng t¨ng m·o", "Minh Ph­îng th­îng giíi", "Minh Ph­îng hé uyÓn", "Minh Ph­îng yªu ®¸i",
+					"Minh Ph­îng cµ sa", "Minh Ph­îng c«n", "Minh Ph­îng t¨ng hµi", "Minh Ph­îng yªu trôy", "Minh Ph­îng h¹ giíi", 
+				},
+			},
+			{
+				szFaction = "ThiÕu L©m §ao",
+				nFirstEquipId = 4883,
+				tbEquipName =
+				{
+					"Minh Ph­îng ch©u liªn", "Minh Ph­îng t¨ng m·o", "Minh Ph­îng th­îng giíi", "Minh Ph­îng hé uyÓn", "Minh Ph­îng yªu ®¸i",
+					"Minh Ph­îng cµ sa", "Minh Ph­îng ®ao", "Minh Ph­îng t¨ng hµi", "Minh Ph­îng yªu trôy", "Minh Ph­îng h¹ giíi",
+				},
+			},
+		},
+	},
+	[2] =
+	{
+		szShowName = "Thiªn V­¬ng Bang",
+		szFaction = "tianwang",
+		nShortFaction = "tw",
+		tbSkill = {322, 325, 323, 708, 1058, 1059, 1060},
+		tbEquip =
+		{
+			{
+				szFaction = "Thiªn V­¬ng Chïy",
+				nFirstEquipId = 4893,
+				tbEquipName =
+				{
+					"Minh Ph­îng ®Þnh quang liªn", "Minh Ph­îng ®Þnh quang kh«i", "Minh Ph­îng ®Þnh quang th­îng giíi", "Minh Ph­îng ®Þnh quang thóc o¶n", "Minh Ph­îng ®Þnh quang yªu ®¸i",
+					"Minh Ph­îng ®Þnh quang kh¶i", "Minh Ph­îng ®Þnh quang chïy", "Minh Ph­îng ®Þnh quang ngoa", "Minh Ph­îng ®Þnh quang béi", "Minh Ph­îng ®Þnh quang h¹ giíi",
+				},
+			},
+			{
+				szFaction = "Thiªn V­¬ng Th­¬ng",
+				nFirstEquipId = 4903,
+				tbEquipName =
+				{
+					"Minh Ph­îng ngù phong liªn", "Minh Ph­îng ngù phong kh«i", "Minh Ph­îng ngù phong th­îng giíi", "Minh Ph­îng ngù phong thóc o¶n", "Minh Ph­îng ngù phong yªu ®¸i",
+					"Minh Ph­îng ngù phong kh¶i", "Minh Ph­îng ngù phong th­¬ng", "Minh Ph­îng ngù phong ngoa", "Minh Ph­îng ngù phong béi", "Minh Ph­îng ngù phong h¹ giíi",
+				},
+			},
+			{
+				szFaction = "Thiªn V­¬ng §ao",
+				nFirstEquipId = 4913,
+				tbEquipName =
+				{
+					"Minh Ph­îng biÓu phong liªn", "Minh Ph­îng biÓu phong kh«i", "Minh Ph­îng biÓu phong th­îng giíi", "Minh Ph­îng biÓu phong thóc o¶n", "Minh Ph­îng biÓu phong yªu ®¸i",
+					"Minh Ph­îng biÓu phong kh¶i", "Minh Ph­îng biÓu phong ®ao", "Minh Ph­îng biÓu phong ngoa", "Minh Ph­îng biÓu phong béi", "Minh Ph­îng biÓu phong h¹ giíi",
+				},
+			},
+		},
+	},
+	[3] =
+	{
+		szShowName = "§­êng M«n",
+		szFaction = "tangmen",
+		nShortFaction = "tm",
+		tbSkill = {339, 302, 342, 710, 1069, 1070, 1071},
+		tbEquip =
+		{
+			{
+				szFaction = "Phi §ao §­êng M«n",
+				nFirstEquipId = 4983,
+				tbEquipName =
+				{
+					"Minh Ph­îng nÆc ¶nh h¹ng liªn", "Minh Ph­îng nÆc ¶nh qu¸n", "Minh Ph­îng nÆc ¶nh th­îng giíi", "Minh Ph­îng nÆc ¶nh hé uyÓn", "Minh Ph­îng nÆc ¶nh triÒn yªu",
+					"Minh Ph­îng nÆc ¶nh gi¸p", "Minh Ph­îng nÆc ¶nh phi ®ao", "Minh Ph­îng nÆc ¶nh ngoa", "Minh Ph­îng nÆc ¶nh yªu trôy", "Minh Ph­îng nÆc ¶nh h¹ giíi",
+				},
+			},
+			{
+				szFaction = "Ná §­êng M«n",
+				nFirstEquipId = 4993,
+				tbEquipName =
+				{
+					"Minh Ph­îng cùc quang h¹ng liªn", "Minh Ph­îng cùc quang qu¸n", "Minh Ph­îng cùc quang th­îng giíi", "Minh Ph­îng cùc quang hé uyÓn", "Minh Ph­îng cùc quang triÒn yªu",
+					"Minh Ph­îng cùc quang gi¸p", "Minh Ph­îng cùc quang ná ", "Minh Ph­îng cùc quang ngoa ", "Minh Ph­îng cùc quang yªu trôy ", "Minh Ph­îng cùc quang h¹ giíi ",
+				},
+			},
+			{
+				szFaction = "Phi Tiªu §­êng M«n",
+				nFirstEquipId = 5003,
+				tbEquipName =
+				{
+					" Minh Ph­îng th­íc kim h¹ng liªn ", " Minh Ph­îng th­íc kim qu¸n ", " Minh Ph­îng th­íc kim th­îng giíi ", " Minh Ph­îng th­íc kim hé uyÓn ", " Minh Ph­îng th­íc kim triÒn yªu ",
+					" Minh Ph­îng th­íc kim gi¸p ", " Minh Ph­îng th­íc kim phi tiªu ", " Minh Ph­îng th­íc kim ngoa ", " Minh Ph­îng th­íc kim yªu trôy ", " Minh Ph­îng th­íc kim h¹ giíi ",
+				},
+			},
+		},
+	},
+	[4] =
+	{
+		szShowName = "Ngò §éc Gi¸o",
+		szFaction = "wudu",
+		nShortFaction = "wu",
+		tbSkill = {353, 355, 711, 1066, 1067},
+		tbEquip =
+		{
+			{
+				szFaction = "Ngò §éc Ch­ëng",
+				nFirstEquipId = 4963,
+				tbEquipName =
+				{
+					" Minh Ph­îng ®éc sa h¹ng liªn ", " H¹ch Hæ ®éc sa ph¸t ®¸i ", " Minh Ph­îng ®éc sa th­îng giíi ", " Minh Ph­îng ®éc sa hé uyÓn ", " Minh Ph­îng ®éc sa yªu ®¸i ",
+					" Minh Ph­îng ®éc sa bÝ trang ", " Minh Ph­îng ®éc sa triÒn thñ ", " Minh Ph­îng ®éc sa ngoa ", " Minh Ph­îng ®éc sa yªu trôy ", " Minh Ph­îng ®éc sa h¹ giíi ",
+				},
+			},
+			{
+				szFaction = "Ngò §éc §ao",
+				nFirstEquipId = 4973,
+				tbEquipName =
+				{
+					" Minh Ph­îng u linh h¹ng liªn ", " H¹ch Hæ u linh ph¸t ®¸i ", " Minh Ph­îng u linh th­îng giíi ", " Minh Ph­îng u linh hé uyÓn ", " Minh Ph­îng u linh yªu ®¸i ",
+					" Minh Ph­îng u linh bÝ trang ", " Minh Ph­îng u linh ®ao ", " Minh Ph­îng u linh ngoa ", " Minh Ph­îng u linh yªu trôy ", " Minh Ph­îng u linh h¹ giíi ",
+				},
+			},
+		},
+	},
+	[5] =
+	{
+		szShowName = "Nga Mi",
+		szFaction = "emei",
+		nShortFaction = "em",
+		tbSkill = {380, 328, 712, 1061, 1062, 1114},
+		tbEquip =
+		{
+			{
+				szFaction = "Nga Mi KiÕm",
+				nFirstEquipId = 4923,
+				tbEquipName =
+				{
+					"Minh Ph­îng l­u v©n ch©u liªn", "Minh Ph­îng l­u v©n ph¸t ®¸i", "Minh Ph­îng l­u v©n th­îng giíi", "Minh Ph­îng l­u v©n hé uyÓn", "Minh Ph­îng l­u v©n yªu ®¸i ",
+					"Minh Ph­îng l­u v©n sam", "Minh Ph­îng l­u v©n kiÕm", "Minh Ph­îng l­u v©n ngoa", "Minh Ph­îng l­u v©n béi ", "Minh Ph­îng l­u v©n h¹ giíi ",
+				},
+			},
+			{
+				szFaction = "Nga Mi Ch­ëng",
+				nFirstEquipId = 4933,
+				tbEquipName =
+				{
+					"Minh Ph­îng hµn ngäc ch©u liªn ", "Minh Ph­îng hµn ngäc ph¸t ®¸i", "Minh Ph­îng hµn ngäc th­îng giíi", "Minh Ph­îng hµn ngäc hé uyÓn", "Minh Ph­îng hµn ngäc yªu ®¸i",
+					"Minh Ph­îng hµn ngäc sam", "Minh Ph­îng hµn ngäc triÒn thñ ", "Minh Ph­îng hµn ngäc ngoa ", "Minh Ph­îng hµn ngäc béi ", "Minh Ph­îng hµn ngäc h¹ giíi ",
+				},
+			},
+		},
+	},
+	[6] =
+	{
+		szShowName = "Thóy Yªn",
+		szFaction = "cuiyan",
+		nShortFaction = "cy",
+		tbSkill = {336, 337, 713, 1063, 1065},
+		tbEquip =
+		{
+			{
+				szFaction = "Thóy Yªn §ao (Ngo¹i)",
+				nFirstEquipId = 4943,
+				tbEquipName =
+				{
+					"Minh Ph­îng hång nhan ch©u liªn ", "Minh Ph­îng hång nhan ph¸t ®¸i", "Minh Ph­îng hång nhan th­îng giíi", "Minh Ph­îng hång nhan hé uyÓn", "Minh Ph­îng hång nhan yªu ®¸i",
+					"Minh Ph­îng hång nhan sam", "Minh Ph­îng hång nhan ®ao ", "Minh Ph­îng hång nhan ngoa ", "Minh Ph­îng hång nhan béi ", "Minh Ph­îng hång nhan h¹ giíi ",
+				},
+			},
+			{
+				szFaction = "Thóy Yªn Song §ao (Néi)",
+				nFirstEquipId = 4953,
+				tbEquipName =
+				{
+					"Minh Ph­îng ¶o th¸i ch©u liªn ", "Minh Ph­îng ¶o th¸i ph¸t ®¸i", "Minh Ph­îng ¶o th¸i th­îng giíi", "Minh Ph­îng ¶o th¸i hé uyÓn", "Minh Ph­îng ¶o th¸i yªu ®¸i",
+					"Minh Ph­îng ¶o th¸i sam", "Minh Ph­îng ¶o th¸i ®ao ", "Minh Ph­îng ¶o th¸i ngoa ", "Minh Ph­îng ¶o th¸i béi ", "Minh Ph­îng ¶o th¸i h¹ giíi ",
+				},
+			},
+		},
+	},
+	[7] =
+	{
+		szShowName = "C¸i Bang",
+		szFaction = "gaibang",
+		nShortFaction = "gb",
+		tbSkill = {357, 359, 714, 1073, 1074},
+		tbEquip =
+		{
+			{
+				szFaction = "C¸i Bang Ch­ëng",
+				nFirstEquipId = 5013,
+				tbEquipName =
+				{
+					" Minh Ph­îng hé ph¸p h¹ng liªn", " Minh Ph­îng hé ph¸p ®Çu hoµn", " Minh Ph­îng hé ph¸p th­îng giíi ", " Minh Ph­îng hé ph¸p hé uyÓn ", " Minh Ph­îng hé ph¸p thóc yªu",
+					" Minh Ph­îng hé ph¸p c¸i y", " Minh Ph­îng hé ph¸p triÒn thñ ", " Minh Ph­îng hé ph¸p ngoa ", "Minh Ph­îng hé ph¸p béi ", " Minh Ph­îng hé ph¸p h¹ giíi ",
+				},
+			},
+			{
+				szFaction = "C¸i Bang Bæng",
+				nFirstEquipId = 5023,
+				tbEquipName =
+				{
+					"Minh Ph­îng trõng giíi h¹ng liªn", "Minh Ph­îng trõng giíi ®Çu hoµn", "Minh Ph­îng trõng giíi th­îng giíi ", "Minh Ph­îng trõng giíi hé uyÓn", "Minh Ph­îng trõng giíi thóc yªu",
+					"Minh Ph­îng trõng giíi c¸i y", "Minh Ph­îng trõng giíi tr­îng", "Minh Ph­îng trõng giíi ngoa", "Minh Ph­îng trõng giíi béi", "Minh Ph­îng trõng giíi h¹ giíi ",
+				},
+			},
+		},
+	},
+	[8] =
+	{
+		szShowName = "Thiªn NhÉn Gi¸o",
+		szFaction = "tianren",
+		nShortFaction = "tr",
+		tbSkill = {361, 362, 715, 1075, 1076},
+		tbEquip =
+		{
+			{
+				szFaction = "ChiÕn NhÉn",
+				nFirstEquipId = 5033,
+				tbEquipName =
+				{
+					"Minh Ph­îng xÝch minh h¹ng liªn", "H¹ch Hæ xÝch minh kh«i", "Minh Ph­îng xÝch minh th­îng giíi", "Minh Ph­îng xÝch minh hé o¶n", "Minh Ph­îng xÝch minh yªu ®¸i",
+					"Minh Ph­îng xÝch minh gi¸p", "Minh Ph­îng xÝch minh th­¬ng", "Minh Ph­îng xÝch minh ngoa", "Minh Ph­îng xÝch minh béi", "Minh Ph­îng xÝch minh h¹ giíi",
+				},
+			},
+			{
+				szFaction = "Ma NhÉn",
+				nFirstEquipId = 5043,
+				tbEquipName =
+				{
+					"Minh Ph­îng s¸t viªm h¹ng liªn", "H¹ch Hæ s¸t viªm kh«i", "Minh Ph­îng s¸t viªm th­îng giíi", "Minh Ph­îng s¸t viªm hé o¶n", "Minh Ph­îng s¸t viªm yªu ®¸i",
+					"Minh Ph­îng s¸t viªm gi¸p", "Minh Ph­îng s¸t viªm ®ao", "Minh Ph­îng s¸t viªm ngoa", "Minh Ph­îng s¸t viªm béi", "Minh Ph­îng s¸t viªm h¹ giíi",
+				},
+			},
+		},
+	},
+	[9] =
+	{
+		szShowName = "Vâ §ang",
+		szFaction = "wudang",
+		nShortFaction = "wd",
+		tbSkill = {365, 368, 716, 1078, 1079},
+		tbEquip =
+		{
+			{
+				szFaction = "Vâ §ang KhÝ",
+				nFirstEquipId = 5053,
+				tbEquipName =
+				{
+					" Minh Ph­îng tiªn ©m phï ", " Minh Ph­îng tiªn ©m qu¸n", " Minh Ph­îng tiªn ©m th­îng giíi ", " Minh Ph­îng tiªn ©m tô ", " Minh Ph­îng tiªn ©m ph¸p ®¸i ",
+					" Minh Ph­îng tiªn ©m ®¹o bµo ", " Minh Ph­îng tiªn ©m kiÕm ", " Minh Ph­îng tiªn ©m ngoa ", " Minh Ph­îng tiªn ©m béi ", " Minh Ph­îng tiªn ©m h¹ giíi ",
+				},
+			},
+			{
+				szFaction = "Vâ §ang KiÕm",
+				nFirstEquipId = 5063,
+				tbEquipName =
+				{
+					" Minh Ph­îng ®¹o minh phï ", " Minh Ph­îng ®¹o minh qu¸n ", " Minh Ph­îng ®¹o minh th­îng giíi ", " Minh Ph­îng ®¹o minh tô ", " Minh Ph­îng ®¹o minh ph¸p ®¸i ",
+					" Minh Ph­îng ®¹o minh ®¹o bµo ", " Minh Ph­îng ®¹o minh kiÕm ", " Minh Ph­îng ®¹o minh ngoa ", " Minh Ph­îng ®¹o minh béi ", " Minh Ph­îng ®¹o minh h¹ giíi ",
+				},
+			},
+		},
+	},
+	[10] =
+	{
+		szShowName = "C«n L«n",
+		szFaction = "kunlun",
+		nShortFaction = "kl",
+		tbSkill = {372, 375, 717, 1080, 1081},
+		tbEquip =
+		{
+			{
+				szFaction = "C«n L«n §ao",
+				nFirstEquipId = 5073,
+				tbEquipName =
+				{
+					"Minh Ph­îng thiªn canh h¹ng liªn ", "Minh Ph­îng thiªn canh ®¹o qu¸n", "Minh Ph­îng thiªn canh th­îng giíi", "Minh Ph­îng thiªn canh hé uyÓn", "Minh Ph­îng thiªn canh ph¸p ®¸i",
+					"Minh Ph­îng thiªn canh ®¹o bµo", "Minh Ph­îng thiªn canh ®ao", "Minh Ph­îng thiªn canh ngoa", "Minh Ph­îng thiªn canh béi", "Minh Ph­îng thiªn canh h¹ giíi",
+				},
+			},
+			{
+				szFaction = "C«n L«n KiÕm",
+				nFirstEquipId = 5083,
+				tbEquipName =
+				{
+					"Minh Ph­îng ng¹o s­¬ng h¹ng liªn ", "Minh Ph­îng ng¹o s­¬ng ®¹o qu¸n", "Minh Ph­îng ng¹o s­¬ng th­îng giíi", "Minh Ph­îng ng¹o s­¬ng hé uyÓn", "Minh Ph­îng ng¹o s­¬ng ph¸p ®¸i",
+					"Minh Ph­îng ng¹o s­¬ng ®¹o bµo", "Minh Ph­îng ng¹o s­¬ng kiÕm ", "Minh Ph­îng ng¹o s­¬ng ngoa ", "Minh Ph­îng ng¹o s­¬ng béi", "Minh Ph­îng ng¹o s­¬ng h¹ giíi",
+				},
+			},
+		},
+	},
+}
+local tbEquipFreeCell =
+{
+	{2, 1}, {2, 2}, {1, 1}, {1, 2}, {2, 1}, --¾±´ø£¬¶¥´÷£¬ÉÏ½ä£¬»¤Ýó£¬Ñü´ø
+	{2, 3}, {2, 4}, {2, 2}, {1, 2}, {1, 1}, --?¢Îï£¬ÎäÆ÷£¬Ñ¥×Ó£¬Ñü×¹£¬Ï¢½ä
+}
+
+local tbFactionSeries =
+{
+	[1] = {1, 2},
+	[2] = {3, 4},
+	[3] = {5, 6},
+	[4] = {7, 8},
+	[5] = {9, 10},
+}
+
+local tbFreeItem =
+{
+	{szName="Håi Thiªn T¸i T¹o CÈm Nang", tbProp={6,1,1781,1,0,0}, tbParam={60}},
+	{szName="VËt phÈm kh¸c", tbProp={6,1,298,1,0,0}},
+	{szName="Qu¶ huy hoµng cao cÊp.", tbProp={6,1,1075,1,0,0}},
+	{szName="Khiªu chiªn lÔ bao", tbProp={6,1,2006,1,0,0}},
+	{szName="-ThËp Toµn §¹i Bæ-", tbProp={6,1,1399,1,0,0}},
+	{szName="Viªm §ª ®å b¶o", tbProp={6,1,2805,1,0,0}},
+	{szName="Tèng kim qu©n c«ng", tbProp={6,1,1477,1,0,0}},
+	{szName="§¹i lùc", tbProp={6,1,2517,1,0,0}},
+	{szName="-H·n HuyÕt Long C©u-", tbProp={0,10,18,1,0,0}, nWidth=2, nHeigth=3},
+}
+
+local tbGMAccount = {"administrator", "admin","thonghon","nguyenvu","thonghonpro","ThongHonPro","HoaSOn12"}
+
+function main()
+       dofile("script/global/Â·ÈË_Àñ¹Ù.lua");
+	dialog_main()
+end
+
+
+
+--==========================================================================================
+
+Include("\\script\\global\\repute_head.lua")
+Include("\\script\\misc\\league_cityinfo.lua")
+
+function dmcreattongtest()
+local strTongName = GetTongName()
+local tszTitle = "Chµo mong b¹n ®· tham gia hÖ thèng <color=yellow>Bang Héi<color>"
+if (strTongName == nil or strTongName == "") then
+	Say(tszTitle,4," NhËn ®i?u kiÖn t¹o bang héi/dmcreatetong","Gia nhËp bang héi/dmjointong","T¹o bang héi/dmcreateit","KOt thóc ®èi tho¹i")
+else
+	Say(tszTitle,0)
+end	
+end
+
+function dmcreatetong()	
+if  GetCamp() ~= 4 then
+		SetCamp(4)
+		SetCurCamp(4)
+		AddRepute(100000)
+		AddLeadExp(1000000)
+		AddLeadExp(1000000)
+
+		AddLeadExp(1000000)
+
+		AddEventItem(195)
+		Earn(1000000)
+		if GetLevel() <= 100 then
+			for i=1,100 do
+				AddOwnExp(100000000)
+			end
+		end
+Msg2Player("<color=yellow>Ng­êi ®· héi ®ñ tÊt c¶ ®iªu kiÖn ®Ó t¹o Bang Héi!<color>")
+else
+end
+end
+
+function dmjointong()
+if  GetCamp() ~= 4 then
+
+		if GetLevel() <= 100 then
+			for i=1,100 do
+				AddOwnExp(100000000)
+			end
+		end
+
+		SetCamp(4)
+		SetCurCamp(4)
+Msg2Player("<color=yellow>Gia nhËp Bang héi thµnh c«ng!<color>")
+else
+end
+end
+
+function dmcreateit()
+	Tong_name,oper = GetTong()
+	if (oper == 0) and (GetTask(99) == 1) then
+		Say("KiOm hiÖp ch­ëng m«n nh©n:Khai s¸ng bang héi, më réng b¸ nghiÖp." ,2,"B¾t ®Çu dùng bang/Direct_CreateTong","§îi ta mét chót/wait_a_moment")
+	elseif (oper == 0) and (GetCamp() == 4) and (GetLevel() >= 50) and (GetReputeLevel(GetRepute()) >= 6) and (GetLeadLevel() >= 30) and (HaveItem(195) == 1) then
+		Talk(6,"create_pay", "Ng­êi ch¬i: KiOm hiÖp ch­ëng m«n nh©n, xin hái ta ph¶i lµm nh­ thO nµo míi ca thÓ khai t«ng lËp ph¸i trë thµnh Bang chñ ®©y?", "KiOm hiÖp ch­ëng m«n nh©n: §Çu tiªn ng­¬i ph¶i ca ®ñ n¨ng lùc l·nh ®¹o, ca 16 ng­êi cïng chU h­íng cïng ng­¬i lËp bang, tr¶i qua 3 ngµy Kh¶o NghiÖm Kú ", "Ch­ëng m«n nh©n:  NOu trong 3 ngµy ca ng­êi rêi bang th× néi trong 3 ngµy ®a ng­êi ph¶i t×m ng­êi kh¸c thay thO.", "Ch­ëng m«n nh©n:  Ng­¬i ph¶i ca ®ñ tµi l·nh ®¹o vµ tin vËt ®a lµ Nh¹c V­¬ng KiOm", "Ng­êi ch¬i: Nh¹c V­¬ng Kiªm ? Ng­êi nai lµ thanh kiªm nµy µ ? ", "Kiªm hiÖp ch­ëng m«n nh©n : Th× ra lµ ng­¬i ®· ca na... Kh«ng tÖ, qu¶ nhiªn tuæi trÎ tµi cao!!! ")
+	else	
+		i = random(0,1)
+		if (i == 0) then
+			Talk(1,"", "Kiªm hiÖp ch­ëng m«n nh©n: Nªu nh­ muèn thµnh lËp bang héi, ng­¬i v× na bá ra 1 l­îng lín thêi gian, søc lùc cïng t©m huyOt, kh«ng thÓ nöa ®­êng hñy bá." )
+		else
+			Talk(6,"", "Kiªm hiÖp ch­ëng m«n nh©n:  Ng­¬i muèn hái ®iªu kiÖn lËp bang µ? §Ó ta nai cho ng­¬i râ.", "Kiªm hiÖp ch­ëng m«n nh©n: ®Çu tiªn ph¶i xuÊt ; tiªp theo ng­¬i kh«ng thÓ ë bÊt kú bang héi nµo kh¸c ; ng­¬i nhÊt ®inh ph¶i danh väng giang hå ; cuèi cïng lµ tµi l·nh ®¹o ph¶i h¬n 30 cÊp.", "Kiªm hiÖp ch­ëng m«n nh©n: Sau ®a ®i chiªn tr­êng t×m mét thanh Nh¹c V­¬ng Kiªm lµm bang chñ tin vËt lµ ®­îc råi.")
+		end
+	end
+end
+
+function create_pay()
+	Say("Kiªm hiÖp ch­ëng m«n nh©n: Ng­¬i cÇn lÖ phi lµ 100 v¹n l­îng b¹c." ,2,"Kh«ng thµnh vÊn ®ª, ta ca ®em 100v l­îng ®©y! /create_pay_yes","H©y dµ, ta kh«ng ®em ®ñ tiªn råi. /create_pay_no")
+
+--	Say("½£ÏµÕÆ·ÅÈË£ºÄÇ·´£¬ÄãÖ»ÒªÓÐ×ã¹»µÄ×Ê½ðÈ·°ïÅÉÄÜ¹»ÔË×ªÆðµ´¾Ý¿ÉÒÔ¸Ë£¬±ÈÈçËµÓÐ¸ö100Ýò¸½¸½×Ó°É¡£" ,2,"·»ÎÊî}£¬?ÒÒÑ¾­Ó?00Ýò¸½¸½×Ó¸Ë/create_pay_yes","Ì«·ÑÇ®?Ë£¬ÉïÒ»µãÐÐ²»Ð?create_pay_no")
+end
+function create_pay_yes()
+
+	if (GetCash() >= 1000000) then
+		Pay(1000000)				-- ÊÕ·Ñ
+		DelItem(195)			-- É¾³ýÏµ¹Øµµ¾ß
+		SetTask(99,1)				-- ²¢´òÉÏ±ê¼Ç£¨Ý¬Ê±¶¨ÒåÎª°ïÅÉÖÐµÄµóÒ»¸öÈË£¨¼´°ïÖ÷±¾ÈË£©£©
+		Direct_CreateTong()		-- ¿ªÊ¼½¨°ï
+		
+	else
+		Talk(1,"", "Kiªm hiÖp ch­ëng m«n nh©n: ViÖc duy tr× bang héi rÊt tèn ti?n, ng­êi ph¶i cè g¾ng cïng mäi ng­êi tUch gap ®Ó bang ®­îc giµu m¹nh. ")	end
+end
+
+
+function Direct_CreateTong()
+	CreateTong(1)				-- µ¯³ö½¨°ï¶Ô»°¿ò£¬½áÊø½Å±¾¿ØÖÆ
+end
+
+--==========================================================================================
+
+function dialog_main()
+	local szTitle = "<npc>Kiªm hiªp quÇn hïng chiªn nam h¶i, long tranh hæ ®Êu diÖu Cöu ch©u. Ta vèn sø gi¶ ®¹i biÓu t©y s¬n c­ ë chç nµy hoan nghªnh c¸c anh hïng hµo kiÖt..."
+	local tbOpt =
+	{
+		{"Vßng quay may m¾n.", PVBD},
+		{"LÖnh bµi ADMIN", lbadmin},
+		{"§çi Tªn Nh©n VËt", doiten},
+		{"§çi Tªn Bang Héi", about_rename_tong},
+		{"Ta muèn chuyÓn sinh.", transfer},		
+		--{"Kh¶o nghiÖm hÖ thèng bang héi.", dmcreattongtest},
+		--{"N©ng ®ªn 190 cÊp", level_up_to190},
+		--{"Vµo ph¸i vµ häc skill 150", choose_faction},
+		--{"LÊy trang bÞ m«n ph¸i", show_faction},
+		--{"Ta muèn lÊy vËt phÈm.", show_item},
+		--{"Ta muèn lÊy mét sè vËt phÈm kh¸c...", moreitem},
+		--{"NhËn ®iÓm", hotro},
+		--{"Trang bÞ hiÕm", fifong},
+		--{"LÊy ngùa", layngua},
+		--{"N÷ TVB", nukim},
+       	 -- {"NhËn Skill 180", nhanskill180},
+		--{"Trang bÞ Cùc PhÈm", cucphkhac},
+		--{"N©ng §ªn 150 cÊp", level_up_to150},
+		--{"Mµu PK", trangthai},	
+		{"Tho¸t"},
+	}
+	local szAccount = GetAccount()
+	for i=1, getn(%tbGMAccount) do
+		if szAccount == %tbGMAccount[i] then
+			--tinsert(tbOpt, 1, {"LÊy QuyÒn Tr­îng GM.", gm_function})
+			--tinsert(tbOpt, 1, {"T¨ng lªn cÊp 190.", level_up_to190})
+			--tinsert(tbOpt, 1, {"ÎÒÒª¸ìÈ¡ÎïÆ·", show_item})
+			--tinsert(tbOpt, 1, {"ÎÒÒª¸ìÈ¡°×»¢Ì××°", show_faction})
+			--tinsert(tbOpt, 1, {"ÎÒÒªÏ´Ëè", clear_attibute_point})
+			break
+		end
+	end
+	CreateNewSayEx(szTitle, tbOpt)
+end
+function nhanskill180()
+	local nFaction = GetLastFactionNumber() + 1
+	if nFaction==0 then
+		Say("Kh«ng cã m«n ph¸i mµ ®åi nhËn skill thÊt truyÒn, ta kh«ng cã thêi gian ®ïa víi ng­¬i", 0)
+		return
+	else
+		for i=1,10 do
+			if (nFaction==i) then
+				if (HaveMagic(SKILL_180[i]) == -1) then
+					AddMagic(SKILL_180[i],20)
+					Say("B¹n häc ®­îc kü n¨ng cÊp 180 <color=yellow>"..GetSkillName(SKILL_180[i]), 0)
+				else
+					Say("Ng­¬i ®· cã kü n¨ng thÊt truyÒn råi, ®õng tham lam", 0)
+					return
+				end
+			end
+		end
+	end
+end
+function doiten()
+	AskClientForString("doitennv", "", 1, 100, "Xin nhËp tªn muèn ®æi");
+end
+function PVBD()
+OpenBingoMachine()
+end
+
+function cucphkhac()
+dohoangkim()
+end
+function bachkim()
+	local tbOpt =
+	{
+		{"ThiÕu l©m", bktl},
+		{"Thiªn v­¬ng", bktv},
+		{"®­êng m«n", bkdm},
+		{"Ngò ®éc", bk5d},
+		{"Nga mi", bknm},
+		{"Thuý yªn", bkty},
+		{"C¸i bang", bkcb},
+		{"Thiªn nhÉn", bktn},
+		{"Vâ ®ang", bkvd},
+		{"C«n l«n", bkcl},
+		{"Trë l¹i", dialog_main},
+		{"Tho¸t"},
+	}
+	CreateNewSayEx("<npc>Chän m«n ph¸i?", tbOpt)
+end
+function bktl()
+AddGoldItem(0, 11)
+AddGoldItem(0, 6)
+end
+function bktv()
+AddGoldItem(0, 16)
+AddGoldItem(0, 21)
+AddGoldItem(0, 26)
+end
+function bknm()
+AddGoldItem(0, 31)
+end
+function bkty()
+AddGoldItem(0, 46)
+end
+function bk5d()
+AddGoldItem(0, 61)
+end
+function bkdm()
+AddGoldItem(0, 71)
+AddGoldItem(0, 76)
+AddGoldItem(0, 81)
+end
+function bkcb()
+AddGoldItem(0, 96)
+end
+function bktn()
+AddGoldItem(0, 101)
+end
+function bkvd()
+for i=4346,4355 do
+AddPlatinaItem(3, i)
+end
+end
+function bkcl()
+AddGoldItem(0, 126)
+end
+function hacthan()
+for i=3890,3894 do
+AddGoldItem(0, i)
+end
+end
+function matna1()
+for i=4493,4523 do
+AddGoldItem(0, i)
+end
+end
+function matna2()
+for i=4524,4554 do
+AddGoldItem(0, i)
+end
+end
+function matna3()
+for i=4555,4585 do
+AddGoldItem(0, i)
+end
+end
+function matna4()
+for i=4586,4616 do
+AddGoldItem(0, i)
+end
+end
+function matna5()
+for i=4617,4630 do
+AddGoldItem(0, i)
+end
+end
+function nukim()
+if GetSex() == 1 then
+SetSeries(0)
+KickOutSelf()
+	else
+	Talk(1,"","Ng­¬i lµ Pª §ª µ ?")
+end
+end
+function hotro()
+	local tbOpt =
+	{
+		{"T¨ng kinh nghiÖm", kn},
+		{"TiÒn", tien},
+		{"TÈy ®iÓm", clear_attibute_point},
+		{"Danh väng,Phóc duyªn", danhvongphucduyen},
+		{"Tµi l·nh ®¹o", lanhdao},
+		{"§iÓm Kü N¨ng", pointkynang},
+		{"§iÓm TiÒm N¨ng", pointtiemnang},
+		{"Trë l¹i", dialog_main},
+		{"Tho¸t"},
+	}
+	CreateNewSayEx("<npc>Anh cÇn g×?", tbOpt)
+end
+function pointkynang()
+AddMagicPoint(100)
+	CreateNewSayEx("<npc>B¹n nhËn ®­îc 100 ®iÓm kü n¨ng", tbOpt)
+KickOutSelf()
+end;
+
+function pointtiemnang()
+AddProp(1000)
+	CreateNewSayEx("<npc>B¹n nhËn ®­îc 10000 ®iÓm tiÒm n¨ng", tbOpt)
+end;
+
+	
+function lanhdao()
+	for i=1,20 do
+AddLeadExp(10000000)
+end
+end
+
+function kn()
+for i=1,80 do
+AddOwnExp(1000000000)
+end
+end
+
+function tien1()
+Earn(1000000)
+end
+
+
+function tien()
+Earn(100000000)
+end
+
+function danhvongphucduyen()
+	AddRepute(100000);
+	FuYuan_Start();
+	FuYuan_Add(100000);
+	CreateNewSayEx("<npc>B¹n nhËn ®­îc 10000 ®iÓm", tbOpt)
+end
+function conghien()
+AddContribution(100000)
+end
+
+function trungsinh()
+AddReBorn(10)
+end
+function gm_functionboss()
+	for i =1,10 do
+		AddItem(6,1,1022,0,0,0)
+	end
+end
+function moreitem()
+	local tab_Content = {
+		" LÊy 100 tiÒn ®ång /tiendong",
+		" NhËn trang bÞ Tr¹m vò Hoa S¬n/itemhs",
+		" NhËn trang bÞ ¤ Ngäc Hoa S¬n/itemhsong",
+		" LÊy VK HKMP /bachkim",
+		--" LÊy 1000v l­îng /tienvan",
+		" LÊy Cùc PhÈm /tbcucph",
+		" Th«i kh«ng lÊy g× n÷a hOt."
+	}
+	Say(" Muèn lÊy thªm c¸i g× nµo ? ", getn(tab_Content), tab_Content);
+end;
+
+function tienvan()
+	Earn(10000000)	
+end;
+
+
+function itemhsong()
+for i=5290,5299 do
+	AddGoldItem(0,i)
+	end
+end;
+
+function itemhs()
+	for i=5300,5309 do
+	AddGoldItem(0,i)
+end
+end;
+
+function tbcucph()
+	cucpham()	
+end;
+
+function tiendong()
+	
+	AddStackItem(100,4,417,1,1,0,0,0)	-- nhan 100 tien dong
+
+
+
+end;
+function layngua()
+	local tbOpt =
+	{
+		{"Ngùa nhãm 1", vip1},
+		{"Ngùa nhãm 2", vip2},
+		{"Ngùa nhãm 3", vip3},
+		{"Ngùa nhãm 4", vip4},
+		{"Ngùa b¸ ®¹o", nguabadao},
+		{"Trë l¹i", dialog_main},
+		{"Tho¸t"},
+	}
+	CreateNewSayEx("<npc>Anh cÇn g×?", tbOpt)
+end
+function nguabadao()
+	AddGoldItem(0, 4480)
+	AddGoldItem(0, 4366)
+for i=5093,5097 do
+AddGoldItem(0, i)
+end
+	CreateNewSayEx("<npc>NhËn ®­îc Ngùa b¸ ®¹o", tbOpt)
+end
+function vip1()
+AddItem(0,10,6,10,0,0,0)
+AddItem(0,10,7,10,0,0,0)
+AddItem(0,10,8,10,0,0,0)
+AddItem(0,10,9,10,0,0,0)
+AddItem(0,10,10,10,0,0,0)
+	CreateNewSayEx("<npc>NhËn ®­îc Ngùa", tbOpt)
+end
+function vip2()
+AddItem(0,10,11,10,0,0,0)
+AddItem(0,10,12,10,0,0,0)
+AddItem(0,10,13,10,0,0,0)
+AddItem(0,10,14,10,0,0,0)
+AddItem(0,10,15,10,0,0,0)
+	CreateNewSayEx("<npc>NhËn ®­îc Ngùa", tbOpt)
+end
+function vip3()
+AddItem(0,10,16,10,0,0,0)
+AddItem(0,10,17,10,0,0,0)
+AddItem(0,10,18,10,0,0,0)
+AddItem(0,10,19,10,0,0,0)
+AddItem(0,10,20,10,0,0,0)
+	CreateNewSayEx("<npc>NhËn ®­îc Ngùa", tbOpt)
+end
+function vip4()
+AddItem(0,10,21,10,0,0,0)
+AddItem(0,10,22,10,0,0,0)
+AddItem(0,10,23,10,0,0,0)
+AddItem(0,10,24,10,0,0,0)
+AddItem(0,10,25,10,0,0,0)
+	CreateNewSayEx("<npc>NhËn ®­îc Ngùa", tbOpt)
+end
+function gm_function()
+	local nCurLevel = GetLevel()
+	if nCurLevel < 120 then
+		ST_LevelUp(120 - nCurLevel)
+	end
+	SetFightState(0)
+	SetCamp(0)
+	SetCurCamp(0)
+	AddMagic(732, 1)--Ë²ÒÆ
+	AddMagic(733, 1)--ÒþÉí
+	if CalcFreeItemCellCount() >= 1 then
+		local tbItem = {szName=" TruyÒn Tèng QuyÒn Tr­îng.", tbProp={6,1,2766,1,0,0}, nBindState=-2}
+		tbAwardTemplet:GiveAwardByList(tbItem, "gmÕËºÅ¸ìÈ¡µµ¾ß", 1)
+	end
+end
+function level_up_to150()
+	local nCurLevel = GetLevel()
+	if nCurLevel >= 150 then
+		if ST_IsTransLife() == 1 then
+			Talk(1, "", "Ng­¬i ®· ®¹t cÊp 150 råi.")
+		else
+			Talk(1, "", "§i chuyÓn sinh tr­íc ®i råi trë l¹i th¨ng cÊp.")
+		end
+		return
+	end
+	local nAddLevel = 150 - nCurLevel
+	ST_LevelUp(nAddLevel)
+end
+function level_up_to190()
+	local nCurLevel = GetLevel()
+	if nCurLevel >= 190 then
+		if ST_IsTransLife() == 1 then
+			Talk(1, "", "Ng­¬i ®· ®¹t cÊp 190 råi.")
+		else
+			Talk(1, "", "§i chuyÓn sinh tr­íc ®i råi trë l¹i th¨ng cÊp.")
+		end
+		return
+	end
+	local nAddLevel = 190 - nCurLevel
+	ST_LevelUp(nAddLevel)
+end
+
+function transfer()
+	if ST_IsTransLife() == 10 then
+		Talk(1, "", "Ng­¬i ®· chuyÓn sinh")
+		return
+	end
+	if GetLevel() < 190 then
+		Talk(1, "", "§¹t cÊp 190 vµ chuyÓn sinh tiÕp")
+		return
+	end
+	if (GetCash() <= 10000) then
+		Talk(1, "", "ChuyÓn sinh cÇn mang ®ñ tiÒn, nÕu kh«ng ®ñ xin h·y ®i chuÈn bÞ")
+		return
+	end
+	Pay(10000)
+	ST_DoTransLife()
+end
+
+function check_faction()
+	local szCurFaction = GetFaction()
+	if szCurFaction ~= nil and szCurFaction ~= "" then
+		return
+	end
+	return 1
+end
+
+function choose_faction()
+	if check_faction() ~= 1 then
+		Talk(1, "", "Ng­¬i ®· gia nhËp m«n ph¸i.")
+		return
+	end
+	local nSeries = GetSeries() + 1
+	local tbOpt = {}
+	for i=1, getn(%tbFactionSeries[nSeries]) do
+		local nIndex = %tbFactionSeries[nSeries][i]
+		tinsert(tbOpt, {%tbFaction[nIndex].szShowName, set_faction, {nIndex}})
+	end
+	tinsert(tbOpt, {"Trë vª", dialog_main})
+	tinsert(tbOpt, {"Kªt thóc ®èi tho¹i."})
+	CreateNewSayEx("<npc>Mét khi gia nhËp m«n ph¸i kh«ng thÓ thay ®æi, h·y suy nghÜ kü.", tbOpt)
+end
+
+function set_faction(nIndex)
+	local szTitle = format("<npc>X¸c nhËn muèn gia nhËp m«n ph¸i ?<color=yellow>%s<color> m«n ph¸i?", %tbFaction[nIndex].szShowName)
+	local tbOpt =
+	{
+		{"X¸c nhËn!", do_set_faction, {nIndex}},
+		{"Trë vª.", choose_faction},
+		{"Kªt thóc ®èi tho¹i."},
+	}
+	CreateNewSayEx(szTitle, tbOpt)
+end
+
+function do_set_faction(nIndex)
+	if check_faction() ~= 1 then
+		Talk(1, "", "Ng­¬i ®· gia nhËp m«n ph¸i.")
+		return
+	end
+	local nResult = SetFaction(%tbFaction[nIndex].szFaction)
+	if nResult == 0 then
+		return
+	end
+	DynamicExecuteByPlayer(PlayerIndex, "\\script\\gmscript.lua", "AddSkills", %tbFaction[nIndex].nShortFaction, 0)
+	for i=1, getn(%tbFaction[nIndex].tbSkill) do--90£¬120£¬150¼¶¼¼ÄÜ
+		AddMagic(%tbFaction[nIndex].tbSkill[i], 20)
+	end
+	AddMagic(210, 1)--?»¼¶Çá¹¦
+	Talk(1, "KickOutSelf", format("Ng­¬i ®· gia nhËp thµnh c«ng ph¸i %s", %tbFaction[nIndex].szShowName))
+end
+
+function show_faction()
+	if check_faction() == 1 then
+		Talk(1, "", "Gia nhËp m«n ph¸i míi ca thÓ nhËn trang bÞ")
+		return
+	end
+	local nFactionId = GetLastFactionNumber() + 1
+	local tbOpt = {}
+	local tbSubFaction = %tbFaction[nFactionId].tbEquip
+	for i=1, getn(tbSubFaction) do
+		tinsert(tbOpt, {tbSubFaction[i].szFaction, show_equip, {nFactionId, i}})
+	end
+	tinsert(tbOpt, {"Trë vª.", dialog_main})
+--	tinsert(tbOpt, {"
+	tinsert(tbOpt, {"Kªt thóc ®èi tho¹i."})
+	CreateNewSayEx("<npc>Xin mêi lùa chän ph¸i.", tbOpt)
+end
+
+function show_equip(nFactionId, nSubFactionId)
+	local tbEquip = %tbFaction[nFactionId]["tbEquip"][nSubFactionId]
+	local tbEquipName = tbEquip["tbEquipName"]
+	local nFirstEquipId = tbEquip["nFirstEquipId"]
+	local tbOpt = {}
+	for i=1, getn(tbEquipName) do
+		tinsert(tbOpt, {tbEquipName[i], get_equip, {i, nFirstEquipId + i - 1}})
+	end
+	tinsert(tbOpt, {"Trë vª", show_faction})
+	tinsert(tbOpt, {"Kªt thóc ®èi tho¹i."})
+	local szTitle = format("<npc>LÊy ®å %s Kim ¤", tbEquip.szFaction)
+	CreateNewSayEx(szTitle, tbOpt)
+end
+
+function get_equip(nIndex, nEquipId)
+	local nWidth = %tbEquipFreeCell[nIndex][1]
+	local nHeigth = %tbEquipFreeCell[nIndex][2]
+	if CountFreeRoomByWH(nWidth, nHeigth) < 1 then
+		Talk(1, "", format("CÇn Ut nhÊt 1 c¸i %dx%d tói ®eo l­ng", nWidth, nHeigth))
+		return
+	end
+	AddGoldItem(0, nEquipId)
+end
+
+function show_item()
+	local tbOpt = {}
+	local nCount = getn(%tbFreeItem)
+	local szOption = ""
+	for i=1, nCount-1 do
+		szOption = format("NhËn %s", %tbFreeItem[i].szName)
+		tinsert(tbOpt, {szOption, get_item, {i}})
+	end
+	szOption = format("NhËn %s", %tbFreeItem[nCount].szName)
+	tinsert(tbOpt, {szOption, get_single_item, {nCount}})
+	tinsert(tbOpt, {"NhËn cùc phÈm giíi chØ...", get_normal_item})
+	tinsert(tbOpt, {"Trë vª.", dialog_main})
+	tinsert(tbOpt, {"Kªt thóc ®èi tho¹i."})
+	CreateNewSayEx("<npc>l·o phu n¬i nµy ca h¬i thë nham vËt phÈm nh­ng nhËn lÊy", tbOpt)
+end
+
+
+function get_normal_item()
+	local tbOpt =
+	{
+		{"NhËn 5 viªn KNB.", cszb},
+		{"H­ng Bang Chi Giíi", xb_jz},
+		{"TrÊn Nh¹c Chi Giíi", zy_jz},
+		{"Th­îng Ph­¬ng Chi Giíi", sf_jz},
+		{"Thiªn Hµ Giíi", sh_jz},
+		{"§O Hoµng Chi Giíi", dh_jz},
+		{"Thiªn Tö Chi Giíi", tz_jz},
+		{"ThO Tóc Toµn Giíi", sz_jz},
+		{"Cµn Kh«n Giíi ChØ (Cùc phÈm)", jz08},
+		{"L·nh B¸ Nguyªn Méng Chi Giíi (Míi)", jz08x},
+		{"Trë vÒ.", dialog_main},
+		{"Kªt thóc ®èi tho¹i."},
+	}
+	CreateNewSayEx("<npc>L·o phu ca mét sè man cùc phÈm, ng­êi cÇn thøc g× ?", tbOpt)
+end
+
+function fifong()
+	local tbOpt =
+	{
+		{"Phi phong", phiphong},
+		{"Ên", an},
+		{"Trang søc", trangsuc1},
+		{"Vò liÖt", vuliet},
+		{"Huynh ®Ö", huynhde},
+		{"Cè s¬n", coson},
+		{"D­¬ng thÇn", duongthan},
+		{"VËt PhÈm Kh¸c", huytinh},
+		{"Trë l¹i", dialog_main},
+{"Tho¸t"},
+	}
+	CreateNewSayEx("<npc>Chän item", tbOpt)
+end
+function trangsuc()
+	local tbOpt =
+	{
+		{"Trang søc 1", trangsuc1},
+		{"Trang søc 2", trangsuc2},
+		{"Trang søc 3", trangsuc3},
+		{"Trë l¹i", dialog_main},
+		{"Tho¸t"},
+	}
+	CreateNewSayEx("<npc>Chän item", tbOpt)
+end
+function an23()
+	local tbOpt =
+	{
+		{"Ên 1", an1},
+		{"Ên 2", an2},
+		{"Ên 3", an3},
+		{"Ên 4", an4},
+		{"Trë l¹i", dialog_main},
+		{"Tho¸t"},
+	}
+	CreateNewSayEx("<npc>Chän item", tbOpt)
+end
+
+function huytinh()
+dotim()
+end
+
+
+function matna()
+	local tbOpt =
+	{
+		{"MÆt n¹ 1", matna1},
+		{"MÆt n¹ 2", matna2},
+		{"MÆt n¹ 3", matna3},
+		{"MÆt n¹ 4", matna4},
+		{"MÆt n¹ 5", matna5},
+		{"Trë l¹i", dialog_main},
+		{"Tho¸t"},
+	}
+	CreateNewSayEx("<npc>Chän item", tbOpt)
+end
+function trangthai()
+	local tbOpt =
+	{
+		{"ChÝnh ph¸i", mauvang},
+		{"Tµ ph¸i", mautim},
+		{"Trung lËp", mauxanh},
+		{"S¸t Thñ", maudo},
+		{"Trë l¹i", dialog_main},
+		{"Tho¸t"},
+	}
+	CreateNewSayEx("<npc>Chän mµu", tbOpt)
+end
+function mauvang()
+		SetCurCamp(1)
+		SetCamp(1)
+		CreateNewSayEx("<npc>B¹n ®æi mµu PK ChÝnh Ph¸i thµnh c«ng.", tbOpt)
+end
+function mautim()
+		SetCurCamp(2)
+		SetCamp(2)
+		CreateNewSayEx("<npc>B¹n ®æi mµu PK Tµ Ph¸i thµnh c«ng.", tbOpt)		
+end
+function mauxanh()
+		SetCurCamp(3)
+		SetCamp(3)
+		CreateNewSayEx("<npc>B¹n ®æi mµu PK Trung LËp thµnh c«ng.", tbOpt)		
+end
+function maudo()
+		SetCurCamp(4)
+		SetCamp(4)
+		CreateNewSayEx("<npc>B¹n ®æi mµu PK S¸t Thñ thµnh c«ng.", tbOpt)		
+end
+function an4()
+for i=5161,5197 do
+AddGoldItem(0, i)
+end
+end
+function an3()
+for i=5131,5161 do
+AddGoldItem(0, i)
+end
+end
+function an2()
+for i=5098,5130 do
+AddGoldItem(0, i)
+end
+end
+function coson()
+AddGoldItem(0, 4441)
+AddGoldItem(0, 4445)
+AddGoldItem(0, 4449)
+AddGoldItem(0, 4453)
+AddGoldItem(0, 4457)
+AddGoldItem(0, 4461)
+AddGoldItem(0, 4465)
+AddGoldItem(0, 4469)
+end
+function huynhde()
+for i=4436,4437 do
+AddGoldItem(0, i)
+end
+for i=4481,4482 do
+AddGoldItem(0, i)
+end
+end
+function vuliet()
+for i=5208,5212 do
+AddGoldItem(0, i)
+end
+end
+function pro1()
+for i=430,441 do
+AddGoldItem(0, i)
+end
+end
+function dongsat()
+for i=494,497 do
+AddGoldItem(0, i)
+end
+for i=378,379 do
+AddGoldItem(0, i)
+end
+end	
+function duongthan()
+for i=514,520 do
+AddGoldItem(0, i)
+end
+end
+function phiphong()
+for i=3465,3490 do
+AddGoldItem(0, i)
+end
+end
+function an()
+for i=3205,3234 do
+AddGoldItem(0, i)
+end
+end
+function trangsuc1()
+for i=3542,3554 do
+AddGoldItem(0, i)
+end
+for i=3491,3506 do
+AddGoldItem(0, i)
+end
+end
+function trangsuc2()
+for i=5241,5261 do
+AddGoldItem(0, i)
+end
+end
+function trangsuc3()
+for i=5262,5289 do
+AddGoldItem(0, i)
+end
+end
+function cszb()
+	AddEventItem(343)
+	AddEventItem(343)
+	AddEventItem(343)
+	AddEventItem(343)
+	AddEventItem(343)
+end
+function xb_jz()
+	AddGoldItem(0, 508)
+end	
+function zy_jz()
+	AddGoldItem(0, 509)
+end	
+function sf_jz()
+	AddGoldItem(0, 510)
+end	
+function sh_jz()
+	AddGoldItem(0, 511)
+end	
+function dh_jz()
+	AddGoldItem(0, 530)
+end	
+function tz_jz()
+	AddGoldItem(0, 531)
+end	
+function sz_jz()
+	AddGoldItem(0, 498)
+end	
+function jz08()
+	AddGoldItem(0, 3878)
+end	
+function jz08x()
+	AddGoldItem(0, 3541)
+end	
+
+function get_item(nIndex)
+	local nMaxCount = CalcFreeItemCellCount()
+	g_AskClientNumberEx(0, nMaxCount, "Xin mêi ®­a vµo nhËn lÊy", {get_item_back, {nIndex}})
+end
+
+function get_item_back(nIndex, nCount)
+	if nCount <= 0 then
+		return
+	end
+	if CalcFreeItemCellCount() < nCount then
+		Talk(1, "", format("CÇn Ut nhÊt <color=yellow>%d<color> tói kh«ng gian...", nCount))
+		return
+	end
+	local szLogTitle = format("[liguan]get_free_item_%s", %tbFreeItem[nIndex].szName)
+	tbAwardTemplet:GiveAwardByList(%tbFreeItem[nIndex], szLogTitle, nCount)
+end
+
+function get_single_item(nIndex)
+	local tbItem = %tbFreeItem[nIndex]
+	if CountFreeRoomByWH(tbItem.nWidth, tbItem.nHeigth) < 1 then
+		Talk(1, "", format("CÇn Ut nhÊt 1 %dx%d µÄ±³°ü¿O¼ä", tbItem.nWidth, tbItem.nHeigth))
+		return
+	end
+	local szLogTitle = format("[liguan]get_free_item_%s", tbItem.szName)
+	tbAwardTemplet:GiveAwardByList(tbItem, szLogTitle)
+end
+
+function clear_attibute_point()
+	local tbOpt =
+	{
+		{"TÈy ®iÓm kü n¨ng", clear_skill},
+		{"TÈy ®iÓm ti?m n¨ng", clear_prop},
+		{"Trë v?", dialog_main},
+		{"KOt thóc ®èi tho¹i."},
+	}
+	CreateNewSayEx("<npc>Ng­¬i quyOt u muèn tÈy tñy?", tbOpt)
+end
+
+function clear_skill()
+	local tbOpt =
+	{
+		{"X¸c nhËn", do_clear_skill},
+		{"§Ó ta suy nghÜ l¹i."},
+		{"Trë v?", clear_attibute_point},
+	}
+	CreateNewSayEx("<npc>Ng­¬i vÉn quyOt u muèn tÈy tñy?", tbOpt)
+end
+
+function do_clear_skill()
+	local i = HaveMagic(210)		-- Çá¹¦¸íÝâ²ï×÷
+	local j = HaveMagic(400)		-- ¡°½ï¸»¼·Æ¶¡±¸íÝâ²ï×÷
+	local n = RollbackSkill()		-- Çå³ý¼¼ÄÜ²¢·µ»ØËùÓÐ¼¼ÄÜ?ã£¨°üµ¨Çá¹¦µÈÌØÊâ¼¼ÄÜ£?
+	local x = 0
+	if (i ~= -1) then i = 1; x = x + i end		-- Õâ¸½¾äÅÐ¶ÏÊÇÅÅ³ý´ÓÎ´Ñ§¹ýÇá¹¦µÄÈË·µ»Ø-1´Ó¶øµ¼Ö¢µãÊý¼ÆËã´íÎóÇé¿ö
+	if (j ~= -1) then x = x + j end
+	local rollback_point = n - x			-- °Ñ¼¼ÄÜµãµ±×ö¿ÕÏÐµãÊý·µ»¹£¬µ«ÏÈ?Û³ýÇá¹¦µ?
+	if (rollback_point + GetMagicPoint() < 0) then		-- Èç¹ûÏ´³É¸Ë¸ºÊý£¬Ôòµ±×÷0£¨ÎªÒÔºó¶µ´ÎÏ´µã±£?ô£?
+		 rollback_point = -1 * GetMagicPoint()
+	end
+	AddMagicPoint(rollback_point)
+	if (i ~= -1) then AddMagic(210, i) end			-- Èç¹ûÑ§¹uÇá¹¦Ô?¼Ó»ØÔ­ÓÐµÈ¼¶
+	if (j ~= -1) then AddMagic(400, j) end			-- Èç¹ûÑ§¹u¡°½ï¸»¼AÆ¶¡±Ý¬Ñù´¦µí
+	Msg2Player("TÈy tñy thµnh c«ng! Ng­¬i ca "..rollback_point.." ®iÓm kü n¨ng ®Ó ph©n phèi l¹i.")
+	KickOutSelf()
+end
+
+function clear_prop()
+	local tbOpt =
+	{
+		{"X¸c nhËn", do_clear_prop},
+		{"§Ó ta suy nghÜ l¹i."},
+		{"Trë v?", clear_attibute_point},
+	}
+	CreateNewSayEx("<npc>Ng­¬i vÉn quyOt u muèn tÈy tñy?", tbOpt)
+end
+
+function do_clear_prop()
+	local base_str = {35,20,25,30,20}			-- ÎåÐÐÈËÎïµÄÌìÉúÊôÐÔÖµ
+	local base_dex = {25,35,25,20,15}
+	local base_vit = {25,20,25,30,25}
+	local base_eng = {15,25,25,20,40}
+	local player_series = GetSeries() + 1
+
+	local Utask88 = GetTask(88)
+	AddStrg(base_str[player_series] - GetStrg(1) + GetByte(Utask88, 1))			-- ½«ÒÑ·ÖÅäÇ±ÄÜÖØÖ·£¨task(88)ÊÇÈÎÎñÖÐÖ±½Ó½±µøµÄ¸¦¸¿¡¢Éí·¨µÈ£©
+	AddDex(base_dex[player_series] - GetDex(1) + GetByte(Utask88, 2))
+	AddVit(base_vit[player_series] - GetVit(1) + GetByte(Utask88, 3))
+	AddEng(base_eng[player_series] - GetEng(1) + GetByte(Utask88, 4))
+end
+
+function write_info()
+	tbInputDialog:InputServer()
+end
+
+function lbadmin()
+local index = AddItem(6,1,4633,0,0,0,0)
+SetItemBindState(index,-2)
+Msg2Player("B¹n nhËn ®­îc LÖnh Bµi ADMIN.")
+end
