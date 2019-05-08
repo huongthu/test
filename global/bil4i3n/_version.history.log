@@ -1,0 +1,357 @@
+[[ Tİnh n¨ng næi bËt ]]
+	-- C«ng Thµnh ChiÕn 
+	-- Tiªu Bang ChiÕn
+	-- C©u c¸ Chu tiªn trÊn
+	-- ChiÕn Long §éng
+	-- Chuçi nhiÖm vô nhËn kü n¨ng cÊp 90 cña thËp ®¹i ph¸i, nguyªn t¸c kingsoft
+	-- tİch hîp míi Core Event, tù ®éng diÔn ra, tù ®éng kÕt thóc, quy ®Şnh khung giê: tİnh n¨ng, ho¹t ®éng, sù kiÖn
+	-- Liªn §Êu (§¬n ®Êu tù do.) 
+	-- NhiÖm vô Tİn sø Phong Kú täa ®é
+	-- V­ît ¶i
+	-- Qu¶ Huy Hoµng vµ Qu¶ Hoµng Kim
+	-- NhiÖm vô S¸t Thñ 
+	-- BÕn thuyÒn Phong L¨ng §é
+	-- Tèng Kim (S¬ - Trung - Cao)
+	-- Boss Hoµng Kim (9h, 14h vµ 21h)
+	-- Boss TiÓu hoµng kim
+	-- Boss Tinh Anh
+	-- Phong Háa Liªn Thµnh
+	-- Hoa S¬n §¹i ChiÕn
+	-- S¨n Nhİm bĞo ph×
+	-- Viªm ®Õ b¶o tµng
+	-- Hook xÕp h¹ng ?
+	-- N©ng cÊp chiÕn m· 
+	-- HÖ thèng nhiÖm vô T©n thñ, nguyªn t¸c nhiÖm vô hoµng kim chİnh tuyÕn
+	-- HÖ thèng check Patch game tõ GameServer
+	-- HÖ thèng tù ®éng rao b¸n kªnh ch¸t tõ GamerServer
+	-- Tİnh n¨ng chèng post ®iÓm tèng kim b»ng IP
+	-- Tİnh n¨ng get IP b»ng protocol khi m¸y chñ sö dông proxy
+	-- B¸o c¸o cô thÓ all ccu vµ off, online
+	-- Thèng kª, trao th­ëng vµ xÕp h¹ng tù ®éng mçi thø 2: cao thñ thÕ giíi, cao thñ m«n ph¸i, phó hé, tèng kim
+	-- §iÓm danh h»ng ngµy
+	-- Th­ëng thêi gian online
+	-- Th­ëng phóc lîi c¸ nh©n: n¹p thÎ lÇn ®Çu, n¹p thÎ lÇn ®Çu trong ®êi, phóc lîi ®¬n(ab, ®q, nt, hc)
+	-- §æi ®å phæ, n©ng cÊp ®å phæ, n©ng cÊp nguyªn liÖu.
+	-- Shop phóc duyªn, shop mÆt n¹, shop mËt tŞch.
+	-- Cã thÓ can thiÖp, ®iÒu chØnh thay ®æi drop thuéc tİnh ma ph¸t cña trang bŞ xanh: Test game, drop normal
+	-- CÊu h×nh t¾t/më cho phĞp c¸c nh©n vËt ®­îc phĞp/kh«ng ®­îc phĞp tham gia b¶n ®å train v­ît cÊp/t©n thñ
+	-- Anti bug tiÒn bang héi, giíi h¹n sè l­îng thµnh viªn tham gia bang héi
+	-- CÊu h×nh hç trî chuyÓn ®æi multigamesv: 1 Gsv, 3 Gsv, 4Gsv, 7 Gsv, 8 Gsv / jx_linux_y -> 16 Gsv
+	-- TÊt c¶ c¸c tİnh n¨ng, ho¹t ®éng, sù kiÖn, th«ng b¸o hÖ thèng, ... ®Òu ®· hç trî ch¹y multigamesv
+	
+[[ Version 4 _C«ng thµnh chiÕn - Trang bŞ Xanh lµm trung t©m ]] : public (version *) * 3
+	-- Söa lçi ch÷ tİm khi tham gia t¹o nh©n vËt tr­íc thêi gian ®ua top chİnh thøc diÔn ra
+	-- Söa lçi hiÖu øng ph¸o hoa khi tíi giê ®ua top chİnh thøc
+	-- §iÒu chØnh kü n¨ng ®­êng m«n: lµm gi¶m hiÖu øng mÊt kh¶ n¨ng phôc håi trªn enemy (cô thÓ gi¶m cßn 1/3 so víi tr­íc)
+	-- §iÒu chØnh kü n¨ng ®­êng m«n: T¨ng hiÖu øng lµm ®Ñp kü n¨ng b·o vò lª hoa
+	-- §iÒu chØnh kü n¨ng ®­êng m«n: gi¶m nhÑ s¸t th­¬ng vµ hñy bá kh¶ n¨ng ®éc ph¸t chİ m¹ng cña kü n¨ng b¶o vò lª hoa
+	-- §iÒu chØnh D· tÈu: Nay nh÷ng nh©n vËt nµo tiÕp nhËn nhiÖm vô t×m ®å chİ lóc lªn b¶n ®å sÏ tù ®éng ®­îc t¨ng thªm kh¶ n¨ng r¬i ra ®å chİ cao h¬n b×nh th­êng 200%
+	-- Tİn sø phong kú täa ®é nay thêi gina tham gia sÏ cßn 1h thay v× 2h so víi tr­íc
+	-- Thªm tİnh n¨ng ®æi skill cÊp 120 cña thËp ®¹i ph¸i, tiÕp nhËn ë ch­ëng m«n m«n ph¸i khi ®¹t ®Õn cÊp 120
+	-- Khëi t¹o vµ ph¸t triÓn tİnh n¨ng Tiªu bang chiÕn: thµnh viªn bang tham gia b¶o vµ c­íp tiªu, c¸c nh©n vËt ch­a bang héi cã thÓ tham gia ®Ó xem ë chÕ ®é tµng y
+	-- Khëi t¹o míi b¶n ®å Tiªu bang chiÕn, chiÕt xuÊt tõ BiÖn kinh
+	-- Liªn ®Êu: chuyÓn nh©n vËt sang tr¹ng th¸i ®å s¸t khi b¾t ®Çu trËn, tr¸nh t×nh tr¹ng bá ch¹y.
+	-- Liªn ®Êu: xÕp h¹ng vµ ph¸t th­ëng ®Õn cÊp 130.
+	-- Liªn ®Êu: thay ®æi thêi gian: nay ho¹t ®éng lóc 19h->20h ®­îc chuyÓn thµnh 18h->19h, thø b¶y chñ nhËt 18h->20h
+	-- Boss Tinh anh: t¹m thêi hñy bá täa ®é khi th«ng b¸o trªn kÖnh hÖ thèng, ng­êi ch¬i ph¶i tù ®i t×m.
+	-- Boss Tinh anh: t¨ng l­îng m¸u hiÖn t¹i lªn thµnh gÇn b»ng hoÆc t­¬ng ®­¬ng víi boss tiÓu.
+	-- Boss Tinh anh: ®iÒu chØnh t¨ng nhÑ tû lÖ r¬i m¶nh trang bŞ Thiªn hoµng
+	-- Söa lçi thu phİ vËt phÈm khi nh©n vËt tiÕn vµo b¶n ®å tÈy tû ®¶o.
+	-- Khëi t¹o vµ ph¸t triÓn tİnh n¨ng Tİnh n¨ng Boss tinh anh: xuÊt hiÖn 5 phót sau khi khëi ®éng gsv, reporn mçi 1h sau khi bŞ h¹ gôc
+	-- N©ng giíi h¹n thµnh viªn cña bang héi lªn thµnh 100 thay v× 70 so víi tr­íc.
+	-- Core Event: khëi t¹o vµ ph¸t triÓn ho¹t ®éng Trung thu - §o¸n hoa ®¨ng cïng chŞ h»ng
+	-- Core Event - trung thu th¸ng 8: ®iÒu chØnh vÒ tû lÖ 	nhËn ®­îc phÇn th­ëng tõ sù kiÖn nµy
+	-- Core Event - trung thu th¸ng 8: c©p nhËt ho¹t ®éng hoa ®¨ng.
+	-- Core Event - trung thu th¸ng 8: thªm th«ng b¸o ho¹t ®éng h¶o töu t­¬ng phïng mçi khi diÔn ra ho¹t ®éng
+	-- MultiGsv: chuyÓn b¶n ®å Phong l¨ng ®é vÒ Gsv 1, c¸c b¶n ®å ®­îc phĞp l­u r­¬ng: Thµnh ®«, th¹ch cæ trÊn, ®¹i lı phñ, long tuyÒn th«n.
+	-- C©u c¸ chu tiªn trÊn: ®iÒu chØnh thêi gian ho¹t ®éng c©u c¸: ®ît 1 lóc 17h30, ®ît 2 lóc 22h20
+	-- Söa hoµn toµn lçi liªn quan ®Õn xÕp h¹ng c¸ nh©n cña tõng nh©n vËt.
+	-- Söa lçi ®iÓm danh h»ng ngµy, lçi chuyÓn thêi gian sang th¸ng kh¸c.
+	-- Core Event - trung thu th¸ng 8: cËp nhËt ho¹t ®éng H¶o töu t­¬ng phïng
+	-- Core Event - trung thu th¸ng 8: cËp nhËt ho¹t ®éng Tr¨ng trßn h¹nh phóc
+	-- Söa lçi r¬i vËt phÈm trªn nhİm ë 2 b¶n ®å cÊp 20: TÇn l¨ng, KiÕm c¸c t©y nam
+	-- Söa lçi nhá liªn quan ®Õn b¸o danh v­ît ¶i Nhİp thİ trÇn.
+	-- V­ît ¶i nhİp thİ trÇn: T¨ng ®iÓm th­ëng kinh nghiÖm khi qua ¶i lªn x20
+	-- Söa lçi ®iÓm exp tõ ho¹t ®éng c©u c¸ kh«ng ®­îc restart khi tham gia ho¹t ®éng ë ngµy míi
+	-- §iÒu chØnh tû lÖ r¬i ®iÓm kinh nghiÖm cho c¸c nh©n vËt pk 0 khi bŞ ®¸nh chÕt.
+	-- Söa lçi nhá liªn quan ®Õn ®iÓm danh h»ng ngµy
+	-- Gi¶m tû lÖ trõng ph¹t khi nh©n vËt bŞ ng­êi ch¬i kh¸c ®¸nh chÕt, cô thÓ 1/2 so víi ban ®Çu
+	-- C©u c¸ - Chu tiªn trÊn: söa lçi hiÓn thŞ sè lÇn cßn l¹i cña l­íi ®¸nh c¸
+	-- C©u c¸ - Chu tiªn trÊn: söa lçi h¹ sö dông cña vËt phÈm cÇn c©u tróc
+	-- C©u c¸ - Chu tiªn trÊn: t¨ng tû lÖ b¾t vµ c©u ®­îc c¸ lªn 70%
+	-- C©u c¸ - Chu tiªn trÊn: söa lçi del item l­íi ®¸nh c¸ khi hÕt sè lÇn
+	-- C©u c¸ - Chu tiªn trÊn: söa lçi giíi h¹n l­îng exp nhËn ®­îc tõ ho¹t ®éng c©u c¸ trong ngµy
+	-- C©u c¸ - Chu tiªn trÊn: thªm hiÖu øng h×nh ¶nh ngåi c©u c¸ cho nh©n vËt khi b¾t ®Çu c©u c¸
+	-- C©u c¸ - Chu tiªn trÊn: söa lçi item khi dïng ngoµi ®Şa ®iÓm c©u vµ ngoµi thêi gian
+	-- Phong l¨ng ®é: Söa lçi nhá liªn quan ®Õn b¸o danh trong multigamesv
+	-- Khëi t¹o vµ ph¸t triÓn tİnh n¨ng: C©u c¸ - Chu tiªn trÊn, thêi gian b¾t ®Çu 7h vµ 17h h»ng ngµy
+	-- ChiÕn long ®éng: Khãa kh«ng cho c¸c nh©n vËt ch÷ tr¾ng tham gia b¶n ®å, tr¸nh t×nh tr¹ng chÆn cæng
+	-- Söa lçi sö dông Huy hoµng qu¶ ngµy h«m sau kh«ng reset
+	-- §iÒu chØnh c¬ chÕ trõng ph¹t pk, nay nh©n vËt kh«ng cã pk khi bŞ ®¸nh chÕt vÉn ph¶i chŞu mÊt ®iÓm exp, cô thÓ 0.4% ®iÓm cho tÊt c¶ c¸c cÊp ®é nh©n vËt
+	-- C¶i thiÖn kü n¨ng ph¸i Thóy yªn: Tèc ®é bay cña tiªn t¨ng lªn 20 so víi tr­íc, s¸t th­¬ng néi c«ng t¨ng lªn 430 thay v× 358 nh­ tr­íc
+	-- C¶i thiÖn kü n¨ng ph¸i Thóy yªn: b¨ng s¸t tÇng 1 tõ 581 t¨ng lªn 700, tÇng 2 gi÷ nguyªn
+	-- C¶i thiÖn kü n¨ng ph¸i Thóy yªn: söa lçi kh«ng cã hiÖu øng b¨ng s¸t khi thi triÓn kü n¨ng
+	-- C¶i thiÖn kü n¨ng ph¸i Thóy yªn: C¶i thiÖn tèc ®é bay vµ xuÊt chiªu cña B¨ng tung v« ¶nh, B¨ng t©m tiªn tö
+	-- Fix mét sè khu vùc bŞ lçi bug: Tiªn th¶o lé, ThiÕt la h¸n, c¸c lçi liªn quan ®Õn unlimit for give item.
+	-- Thªm logs l­u l¹i th«ng tin sö dông Méc nh©n lÖnh, dïng cho viÖc hç trî ng­êi ch¬i
+	-- Söa lçi th«ng b¸o hÖ thèng kªnh khi diÔn ra ChiÕn long ®éng
+	-- Söa lçi NPC rêi map bŞ mÊt khi hÕt ho¹t ®éng chiÕn long ®éng.
+	-- Thªm tr¹ng th¸i bÊt tö cho c¸c nh©n vËt míi vµo b¶n ®å ChiÕn long ®éng trong 4 gi©y.
+	-- Gi¶m sè l­îng quû huy hoµng trªn mçi b·i xuèng cßn kho¶ng 40 trong ChiÕn long ®éng.
+	-- ChiÕn long ®éng nay ®­îc phĞp tham gia tr­íc thêi gian 30 phót.
+	-- Bang héi: Gi¶m thêi gian chê ®æi phe ph¸i cña bang héi xuèng cßn 30 gi©y.
+	-- Khëi t¹o vµ ph¸t triÓn tİnh n¨ng ChiÕn long ®éng.
+	-- Chia thªm 1 Gsv phô tr¸ch ch¹y c¸c ho¹t ®éng trong trß ch¬i, gi¶m t¶i cho c¸c gsv train vµ th«n thµnh.
+	-- LÔ quan: kh«ng xãa tiÒn ®ång mçi khi ng­êi ch¬i ra lÖnh xãa vËt phÈm.
+	-- Nhİm bĞo ph×: Söa lçi hiÓn thŞ tæng sè nhİm bĞo ph× trong ngµy.
+	-- Bang héi: Më ®æ phe ph¸i bang héi miÔn phİ, mçi lÇn ®æi phe ph¸i yªu cÇu 5 phót sau míi cã thÓ tiÕp tôc.
+	-- T¹m thêi ®ãng chÕ ®é B¶o vÖ nguyªn so¸i trong tèng kim.
+	-- Thªm bé vò khİ cho thËp ®¹i m«n ph¸i hç trî t©n thñ, thuéc tİnh ma ph¸p: Tèc ®é ®¸nh, chİnh x¸c.
+	-- Boss tiÓu hoµng kim: Söa lçi xuÊt hiÖn boss trªn multigamesv
+	-- Boss tiÓu hoµng kim: T¨ng m¸u cña boss vµ kh¸ng tİnh lªn x10 so víi ban ®Çu.
+	-- Kü n¨ng C«n l«n: NhÊt khİ tam thanh vµ thanh thiªn ®Şa träc chØ ®­îc phĞp buff cho b¶n th©n, tù ®éng buff.
+	-- T¹o bé m¶nh trang bŞ Kim phong tõ 1 ®Õn 6, ®æi ë NPC thî rÌn thÇn bİ l©m an.
+	-- Söa lçi liªn quan ®Õn vËt phÈm T©m t©m t­¬ng ¸nh phï.
+	-- Söa lçi phong kú khi nh©n vËt tham gia ho¹t ®éng nh­ng cè t×nh tho¸t b¶n ®å.
+	-- Thªm tİnh n¨ng cÊm ch¸t trong hÖ thèng kªnh trong kho¶ng thêi gian quy ®Şnh, ng­êi ch¬i sÏ nhËn ®­îc th«ng b¸o tù ®éng.
+	-- Bá giíi h¹n danh väng lµm bang chñ vµ tr­ëng l·o trong bang héi.
+	-- Méc nh©n: T¨ng m¸u x3, t¨ng kh¸ng tİnh lªn tèi ®a, t¨ng kh¶ n¨ng phôc håi lªn x3.
+	-- Khëi t¹o vµ ph¸t triÓn Core Event, Core Item, Core NPC, Core Activity
+	-- H¹ møc th­ëng ®iÓm kinh nghiÖm cho Khiªu chiÕn lÖnh xuèng cßn 20k.
+	-- B¸n thªm mét sè vËt phÈm chç thÇn bİ th­¬ng nh©n: thñy tinh, tinh hång b¶o th¹ch, tiªn th¶o lé.
+	-- Tèng kim: nay trËn 21 giê bªn th¾ng nhËn ®­îc hu©n c«ng x2exp, bªn thua nhËn ®­îc hu©n ch­¬ng.
+	-- Söa lçi t¹o bang héi thÊt b¹i nh­ng vÉn bŞ khÊu trõ ®¹o cô ®iÒu kiÖn t¹o bang chç NPC ch­ëng m«n hoa s¬n.
+	-- Khãa vÜnh viÔn c¸c vËt phÈm nhËn ®­îc tõ ho¹t ®éng ®iÓm danh h»ng ngµy.
+	-- Thªm th«ng b¸o tæng sè l­îng thµnh viªn member/limit mçi khi cã thµnh viªn míi vµo bang.
+	-- Xö lı täa ®é cña Nhİm bĞo ph× vµ thêi gian biÕn mÊt mçi 1 giê.
+	-- §ång bé vµ khëi ®éng anti post tèng kim b»ng protocol.
+	-- Giíi h¹n thµnh viªn tham gia bang héi thµnh 70 ng­êi.
+	-- T¨ng tû lÖ r¬i ra ®å chİ vµ mËt chİ khi lµm nhiÖm vô d· tÈu ë qu¸i th­êng vµ boss xanh.
+	-- Kü n¨ng ThiÕu l©m: T¨ng dame cho kü n¨ng Hµng long b¸t vò lªn 40%
+	-- Më r­¬ng ë ThÈm cöu chuyÓn vÒ xu t­¬ng ®­¬ng gi¸ trŞ vµ ®ång gi¸ mçi r­¬ng.
+	-- T¨ng gi¸ khi röa pk trong tï, nay pk 8~10 cã sÏ kh«ng tù ®éng ®­a vµo ®¹i l¹i nh­ tr­íc.
+	-- Xãa b¶n ®å luyÖn c«ng ë xa phu, chuyÓn vµo ThÇn thµnh phï, hç trî b¸n vËt phÈm.
+	-- Kü n¨ng ThiÕu L©m: Fig bug lùc tay cña Hµng long vµ ®¹t ma.
+	-- Kü n¨ng C«n l«n: Söa lçi céng kü n¨ng HuyÒn thiªn v« cùc.
+	-- Kü n¨ng Vâ ®ang: TrÊn ph¸i t¨ng l«i s¸t tèi thiÓu vµ tÊn c«ng chİ m¹ng 25%.
+	-- Söa lçi th«ng b¸o trong lÖnh bµi admin, hç trî multigamesv.
+	-- Khëi t¹o item méc nh©n lÖnh, khi sö dông sÏ gäi ®Õn 1 méc nh©n, hç trî luyÖn kü n¨ng.
+	-- HiÖu øng t©n thñ: gi¶m kh¶ n¨ng håi phôc, t¨ng thªm kh¸ng tİnh vµ m¸u tèi ®a.
+	-- M¸u t©n thñ: Thªm nhËn m¸u t©n thñ ®Õn cÊp 80.
+	-- Kü n¨ng ®éc s¸t: Bá kh¶ n¨ng ph¸t ®éc chİ m¹ng cña Ngò ®éc vµ khi kÕt hîp gi÷a ngò ®éc víi ®­êng m«n.
+	-- Thay ®æi Phi tèc hoµn thµnh Phong v©n phi tèc hoµn trong shop qu©n nhu quan.
+	-- Giíi h¹n sö dông thiÕt la h¸n ®Õn cÊp 150
+	-- Anti bug tiÒn bang héi vµ giíi h¹n thµnh viªn.
+	
+[[ Version 3 _C«ng thµnh chiÕn - Trang bŞ Xanh lµm trung t©m ]] : public (version *) * 2
+	-- ChuyÓn Update th«ng tin ng­êi ch¬i dïng ®Ó sÕp h¹ng c¸ nh©n (WorkRank) sang S3Relay tr¸nh t×nh tr¹ng kh«ng l­u th«ng tin
+	-- T¨ng kh¶ hîp thµnh m¶nh trang bŞ hoµng kim lªn møc gÇn nh­ 100%
+	-- Gi¶m tû lÖ r¬i tiÒn v¹n max 9x
+	-- Sö lçi b¸o sai gi¸ khi tham gia tèng kim
+	-- Gi¶m nhÑ ®iÓm th­ëng Liªn ®Êu khi kÕt thóc mïa gi¶i, tr¸nh t×nh tr¹ng Clone
+	-- Bá khãa vÜnh viÔn tiÒn ®ång
+	-- Nay tho¸t game sÏ kh«ng bŞ mÊt thêi gian tİch lòy Online n÷a, kÓ c¶ khi tiÕn hµnh ñy th¸c, fix lçi xãa ®iÓm tİch lòy khi truyÒn tèng chç xa phu
+	-- T¨ng giíi h¹n sè lÇn tham gia V­ît ¶i trong ngµy lªn 3 lÇn
+	-- T¨ng kh¶ n¨ng r¬i LB Phong l¨ng ®é trªn map Phong l¨ng ®é
+	-- Fix hoµn toµn lçi khëi ®éng liªn ®Êu do thiÕu kh«ng gian chøa trong m¶ng, nÕu l­îng ®iÓm tİch lòy v­ît qu¸ giíi h¹n m¶ng yªu cÇu ph¶i t¨ng thªm
+	-- Nay cã thÓ Config ®­a ng­êi ch¬i nhËn nhiÖm vô h¹ Boss S¸t thñ ®Õn khu vùc Boss hay kh«ng trong file Config
+	-- FIx lçi mua Item m¸u 1 l­îng trong Tèng kim cã thÓ b¸n l¹i víi gi¸ 3000 l­îng
+	-- Kh¶ n¨ng xÕp chång cho c¸c vËt phÈm: Phóc duyªn, quÕ hoa töu, tiªn th¶o léi, b¸ch qu¶ lé, thiªn s¬n b¶o lé, tiªn th¶o léi ®Æc biÖt
+	-- Fix lçi xÕp chång c¸c item mua b»ng ®iÓm tİch lòy trong tèng kim chç b¸o danh tèng kim
+	-- Fix lçi auto vlbs mua thæ ®Şa phï kh«ng giíi h¹n
+	-- Set l¹i c¸c th«ng sè trong file mapslist.ini kh«ng cho sö dông thæ ®Şa phï ë c¸c khu vùc ®Æc biÖt v× thæ ®Şa phï mÆc ®Şnh kh«ng chØnh söa ®­îc code
+	-- Fix lçi khai b¸o th«ng sè Item trong file dropscript cña trang bŞ tõ thiªn nhÉn ®Õn vâ ®ang
+	-- Xãa dßng thu håi trang bŞ háng chç thî rÌn, tr¸nh tr­êng hîp ng­êi ch¬i v« t×nh hñy trang bŞ mµ kh«ng söa
+	-- Ho¹t ®éng v­ît ¶i nay sÏ ®­îc miÔn phİ 1 lÇn trong ngµy, 2 lÇn cßn l¹i yªu cÇu ng­êi tham gia ph¶i mang theo s¸t thñ gi¶n, tèi ®a tham gia 3 lÇn
+	-- Fix lçi V­ît ¶i qu¸i ch­a hÕt ®· ra ®ît qu¸i tiÕp theo vµ vËt phÈm "Tu ch©n yÕu quyÕt (V­ît ¶i)"
+	-- §­a toµn bé tİnh n¨ng cña cÈm nang ®ång hµnh vµo thÇn hµnh phï, nÕu khu vùc kh«ng cho phĞp më ThÇn hµnh phï th× chØ cã thÓ sö dông tİnh n¨ng cña cÈm nang
+	-- Shop Tèng kim nay sÏ b¸n ®Çu ®ñ c¸c lo¹i ®¸ kh¶m ®å, hñy drop ®¸ ë c¸c ho¹t ®éng vµ tİnh n¨ng
+	-- §­a bé kü n¨ng vÒ l¹i nÒn c«ng thµnh chiÕn, kh«ng chØnh söa, söa l¹i tèc luyÖn kü n¨ng, lªn nhanh ë cÊp thÊt, khã dÇn ë cÊp cao
+	-- Shop ho¹t ®éng nay sÏ b¸n c¸c vËt phÈm khi tham gia ho¹t ®éng, ®iÒu chØnh l¹i gi¸ b¸n vµ thªm vËt phÈm hç trî t¨ng kü n¨ng 120, vËt phÈm ho¹t ®éng
+	-- Dïng thêi gian hiÖn t¹i cña Tèng kim lu©n phiªn víi ho¹t ®éng Viªm ®Õ, th­ëng thªm tèng kim vµo 21h h»ng ngµy
+	-- Boss Hoµng kim nay xuÊt hiÖn sau 2 tiÕng nÕu kh«ng bŞ h¹ sÏ tõ ®éng biÕn mÊt
+	-- T¨ng gi¸ chuyÓn giíi, nay chuyÓn ph¸i vµ chuyÓn giíi vµo c¸c ph¸i ®Æc biÖt sÏ yªu cÇu thªm Tİn vËt Ch­ëng m«n
+	-- V­ît ¶i Viªm ®Õ nay sÏ miÔn phİ lÇn ®Çu tham gia trong ngµy, hÕt l­ît miÔn phİ yªu cÇu ph¶i cã Viªm ®Õ lÖnh
+	-- T¹m thêi kh«ng cho r¬i ®å phæ hoµng kim m«n ph¸i vµ ®¸ nguyªn liÖu n©ng cÊp ®å
+	-- ChuyÓn c¸c hµm nhËn ®­îc phÇn th­ëng khi tham gia c¸c ho¹t ®éng vÒ 1 file cÊu h×nh ®Ó tiÖn qu¶n lı
+	-- Xãa Npc T©n thñ quan, chuyÓn tİnh n¨ng cña t©n thñ quan vµo trong CÈm nang ®ång hµnh
+	-- Tİnh n¨ng nhËn th­ëng n¹p thÎ, tİch lòy tham gia c¸c ho¹t ®éng nhËn ®­îc Phóc lîi ®¬n ®Ó ®æi c¸c phÇn th­ëng gi¸ trŞ kh¸c
+	-- Cã thÓ ®æi §å phæ hoµng kim b»ng m¶nh ®å phæ hoµng kim nhËn ®­îc khi tham gia c¸c ho¹t ®éng trong game, tû lÖ thÊp
+	-- Thªm tİnh n¨ng thay ®æi thuéc tİnh ma ph¸p cña trang bŞ xanh chç thî rÌn thµnh thŞ
+	-- Ho¹t ®éng Boss TiÓu hoµng kim xuÊt hiÖn vµo mçi 5 phót khi khëi ®éng sv vµ chu kú håi sinh 1 tiÕng sau khi chÕt, ngÉu nhiªn ë c¸c thµnh thŞ
+	-- Thªm kh¶ n¨ng lag dame ®éc cho ph¸i ngò ®éc, t¨ng v¹n ®éc thùc t©m trong server, client vÉn gi÷ chØ sè nh­ cò
+	-- Xãa NPC H»ng nga ë khu vùc c¸c th«n trÊn do khai b¸o sai ngµy giê trong config Activitysys 43
+	-- Qu¶ Hoµng Kim vµ Huy Hoµng nay kh«ng h¸i sau 10 phót sÏ tù ®éng biÕn mÊt
+	-- Hoµn tÊt nhiÖm vô T©n thñ, dùa theo nguyªn t¸c cña nhiÖm vô hoµng kim Chİnh tuyÕn
+	-- Thªm 2 Item gia h¹n thuËt cho phĞp gia h¹n bÊt cø vËt phÈm nµo cã h¹n sö dông, thêi gian gia h¹n sÏ ®­îc céng dån víi thêi gian hiÖn cã trªn vËt phÈm, tèi ®a 1 n¨m
+	-- Gép tÊt c¶ c¸c tab cña Kú tr©n c¸c l¹i lµm 1, add thªm c¸c vËt phÈm míi víi gi¸ b¸n rÎ
+	-- Thªm phÇn config cho xa phu ®­îc phĞp truyÒn tèng ng­êi ch¬i ®Õn c¸c map luyÖn c«ng ë chÕ ®é full hoÆc kh«ng full
+	-- Thªm item N¨ng ®éng lÖnh gióp t¨ng thªm sè lÇn tham gia c¸c ho¹t ®éng trong ngµy khi hÕt l­ît, chØ b¸n trong kú tr©n c¸c
+	-- Thªm tİnh n¨ng kiÓm tra patch game tõ gameverver, chèng sö dông patch game kh¸c ®Ó v­ît giíi h¹n account
+	-- Thªm hÖ thèng tù ®éng rao kªnh ch¸t ®­îc ®iÒu khiÓn bëi GameServer, c¸c thiÕt lËp trong CÈm Nang §ång Hµnh cña ng­êi ch¬i
+	-- Fix l¹i lçi sÕp h¹ng ng­êi ch¬i do sai sè cña phÇn tr¨m ®iÓm kinh nghiÖm kh«ng ®ång nhÊt vÒ kiÓu d÷ liÖu nhËp vµo
+	-- Nay b¶ng xÕp h¹ng thËp ®¹i cao thñ vµ thËp ®¹i cao thñ m«n ph¸i sÏ ®­îc xÕp mçi khi khëi ®éng l¹i s3relay, kh«ng hiÓn thŞ cÊp, kh«ng cho phĞp tù ®éng xÕp mçi khi ng­êi ch¬i tho¸t game
+	-- Tİnh n¨ng chèng post ®iÓm chiÕn tr­êng Tèng Kim b»ng IP, ng­êi ch¬i tham gia ®Çu tiªn th× c¸c ng­êi ch¬i tiÕp theo cã cïng IP sÏ kh«ng thÓ gia nhËp phe kh¸c
+	
+[[ Version 2 _Trang BŞ TrÊn Ph¸i ]] : (public version *) * 1
+	-- NhËn th­ëng t©n thñ b»ng GiftCode
+	-- LÖnh bµi Admin §­a ng­êi lªn ®¶o l­u mµu ch÷ vµo Task, khi ®­a ng­êi xuèng sÏ lÊy l¹i gi¸ trŞ trong Task
+	-- LÖnh bµi Admin Buff trang bŞ cho ng­êi ch¬i tïy chän
+	-- LÖnh bµi Admin Buff ®¼ng cÊp cho ng­êi ch¬i tïy chän
+	-- LÖnh bµi Admin Buff tiÒn v¹n cho ng­êi ch¬i tïy chän
+	-- LÖnh bµi Admin Edit Task ng­êi ch¬i tïy chän
+	-- LÖnh bµi Admin Fix lçi kh«ng dïng ®­îc ThÇn hµnh phï vµ thæ ®Şa phï cho ng­êi ch¬i
+	-- LÖnh bµi Admin Gäi ng­êi ch¬i ®Õn ngay vŞ trŞ cña GameMaster ®ang ®øng
+	-- LÖnh bµi Admin Gi¶i kÑt nh©n vËt sÏ ®­a vÒ tr¹ng th¸i phi chiÕn ®Êu
+	-- LÖnh bµi Admin Edit tr¹ng th¸i chiÕn ®Êu cho ng­êi ch¬i tïy chän
+	-- Nay tiªn th¶o lé ®· ®­îc sö dông sÏ KH¤NG bŞ mÊt t¸c dông khi tho¸t game vµo l¹i
+	-- LÖnh bµi Admin nay cã thÓ lÊy n¬i ®ang ®øng cña ng­êi ch¬i, tªn tµi kho¶n ng­êi ch¬i Offline Live vµ cã thÓ duy chuyÓn ngay ®Õn vŞ trİ ®ã
+	-- Mét sè NPCs tù ®éng ch¸t trong m¸y chñ, ch¹y b»ng NPCTimer thêi gian kho¶ng vµi chôc gi©y
+	-- HiÖu øng håi m¸u vµ mana nay sÏ hç trî ®Õn hÕt ®¼ng cÊp 140, tèc ®é håi 400 ®¬n vŞ trong 1 gi©y
+	-- T¨ng kinh nghiÖm cè ®Şnh mçi lÇn hoµn thµnh nhiÖm vô d· tÈu lªn 1,5 triÖu, ®¹t mèc mçi ngµy hoµn thµnh 10, 20, 30, 40 nhiÖm vô sÏ ngÉu nhiªn nhËn ®­îc phÇn th­ëng phong phó
+	-- C«ng thµnh chiÕn sè ®Şch giÕt ®­îc kÕt thóc trËn sÏ ®­îc nh©n víi 500.000 b¼ng tæng sè ®iÓm exp mµ ng­êi ch¬i nhËn ®­îc
+	-- LÖnh bµi Admin hiÓn thŞ ®­îc sè ng­êi Offline Live vµ ®ang Online
+	-- Tù ®éng load l¹i file danh s¸ch c¸c cao thñ cña tuÇn tr­íc, dofile lÔ quan, th«ng b¸o trªn kªnh thÕ giíi cho ng­êi ch¬i, xãa c¸c xÕp h¹ng phó hé, m«n ph¸i, phó hé m«n ph¸i trªn b¶ng xÕp h¹ng!
+	-- LÖnh bµi Admin thªm tİnh n¨ng Reload Script cho S3Relay, load Task cho S3Relay
+	-- T¨ng tû lÖ ra boss xanh, t¨ng tû lÖ r¬i thÇn bİ ®å chİ, thÇn bİ lé chİ
+	-- Gi¶m tèc ®é luyÖn kü n¨ng xuèng cßn 30 lóc tr­íc lµ 100, mÆc ®Şnh lµ 2
+	-- Kú tr©n c¸c: t¨ng gi¸ c¸c vËt phÈm lªn hÖ sè 200, xãa bá tiªn th¶o lé, xãa bá thiÕt la h¸n, gi¶m gi¸ b¸n c¸c vËt phÈm víi hÖ sè 200, thªm c¸c m· bµi phi v©n vµ b«n tiªu
+	-- Hñy b¸n Tiªn th¶o lé chç ThÇn bİ th­¬ng nh©n
+	-- Më réng r­¬ng nay sÏ quy ®æi b»ng KNB, gi¶m gi¸ KNB xuèng 1 KNB cho mçi lÇn më r­¬ng
+	-- T¨ng l­îng kinh nghiÖm lªn cÊp, l­îng kinh nghiÖm cÊp 130 lªn 140 t­¬ng ®­¬ng víi 140 lªn 150, ...
+	-- ChuyÓn ®æi m«n ph¸i cÇn ph¶i th¸o bá toµn bé trang bŞ trªn ng­êi míi cho phĞp chuyÓn ph¸i, tr¸nh lçi phèi trang bŞ kh«ng hîp lı
+	-- Fix lçi MissleSet Have Full!!!, It Maybe A Error! t¨ng MaxMissleCount=300000 trong gamesetting.ini mÆc ®Şnh lµ 30000
+	-- Boss Hoµng kim nay sÏ xuÊt hiÖn ë thÊt ®¹i thµnh thŞ kh«ng xuÊt hiÖn ë c¸c map train kh¸c, mçi thµnh thŞ 1 boss
+	-- §ãng tÊt c¶ c¸c NPC cã liªn quan ®Õn nhiÖm vô hoµng kim, nhiÖm vô phô chi tuyÕt t¹i file cÊu h×nh server
+	-- LÊy l¹i file chuÈn goldequip dïng ®Ó cÊu h×nh c¸c trang bŞ trÊn ph¸i, chØ xãa c¸c tr­êng phİa tr­íc kh«ng cÇn thiÕt nh­ [§å Phæ]
+	-- ThÇn bİ §¹i Hång Bao th­ëng s­ ®å nay chØ cho phĞp ngÉu nhiªn 3 vËt phÈm Thiªn s¬n b¶o lé, b¸ch qu¶ lé vµ tinh hång b¶o th¹ch
+	-- Th­ëng kinh nghiÖm hoµn thµnh nhiÖm vô cña s­ ®å thiÕp sÏ gi¶m ®i 1 nöa so víi mÆc ®Şnh
+	-- Tİnh n¨ng s­ ®å thiÕp cã thÓ ®ãng trong file cÊu h×nh, mçi ng­êi ch¬i nay chØ cã thÓ nhËn tèi ®a 3 ng­êi ch¬i lµm ®Ö tö
+	-- TiÒn trang nay sÏ hç trî rót tiÒn ®ång vµ ®æi KNB thµnh tiÒn ®ång víi hÖ sè 200
+	-- T¨ng ®é bÒn cña tÊt c¶ c¸c trang bŞ lªn 888 bao gåm trang bŞ normal vµ goldequip
+	-- Nay ®Ó hoµn thµnh ngay nhiÖm vô d· tÈu ng­êi ch¬i cÇn bá ra 1 Tö thñy tinh thay v× 1 tiÒn ®ång nh­ tr­íc kia
+	-- Tİnh n¨ng xÕp h¹ng (Thø h¹ng giang hå) cho toµn bé c¸c nh©n vËt trong m¸y chñ mçi khi khëi ®éng S3Relay hoÆc cã thÓ cËp nhËt ngay trong lÖnh bµi Admin
+	-- Gi¶m gi¸ tÊt c¶ c¸c trang bŞ Normal xuèng 66.66% khi b¸n vµo shop vµ c¸c trang bŞ GoldEquip gi¶m gi¸ b¸n vµo shop cßn l¹i 0 l­îng
+	-- Thay ®æi Thæ ®Şa phï mÆc ®Şnh cña t¹p hãa c¸c t©n thñ th«n vµ thµnh thŞ thµnh Thæ ®Şa phï míi, tr¸nh tİnh tr¹ng trë vÒ n¬i l­u r­¬ng trong c¸c b¶n ®å ®Æc biÖt
+	-- Hñy bá hµm kiÓm tra giíi h¹n Ğp ®å tİm trong ngµy cña thî rÌn ë c¸c thµnh thŞ
+	-- Hñy khãa c¸c vËt phÈm nhËn ®­îc tõ ho¹t ®éng Online, gi¶m gi¸ trŞ cña c¸c kú tr©n dŞ b¶o nhËn ®­îc tõ ho¹t ®éng nµy
+	-- C¾t gi¶m toµn bé c¸c kú tr©n dŞ b¶o gi¸ trŞ trong ho¹t ®éng ®iÓm danh h»ng ngµy, th­ëng thªm ®iÓm kinh nghiÖm theo mèc cho ng­êi ch¬i
+	-- Thªm mét sè phÇn th­ëng ®¸ng gi¸ cho ng­êi ch¬i khi lªn cÊp chç t©n thñ quan, lªn ®Õn 120 sÏ nhËn ®­îc 1 bé kim phong, 4 mãn ®Şnh quèc thêi h¹n, 1 mãn trÊn ph¸i thêi h¹n, 1 ngùa phi v©n thêi h¹n, 1 ngùa chiÕu d¹ thêi h¹n, ...
+	-- ViÕt l¹i hµm trao th­ëng cho ng­êi ch¬i trong ®ît ®ua TOP, nay chØ cÇn khai b¸o c¸c th«ng sè kh«ng cßn r­êm rµ nh­ tr­íc
+	-- Fix lçi ®å phæ hiÓn thŞ tiÕng trung: xãa file huangjintupu.txt link settings/item ë Client sö dông file mÆc ®Şnh cña VNG trong update4.pak
+	-- T¨ng tû lÖ drop c¸c dßng s¸t th­¬ng néi trªn vò khİ, gi¶m drop c¸c lo¹i s¸t th­¬ng vµ hót hİt trªn vò khİ ë møc cao
+	-- Liªn ®Êu: ®­a tÊt c¶ ng­êi ch¬i kh«ng ph©n biÖt ®¼ng cÊp vµ khu vùc nay sÏ vµo chung 1 ®Êu tr­êng cao cÊp leaguematch\npc\officer.lua n_level = 2 line 517 & 311 & 249 - Head.lua line 404, khu vùc trao th­ëng liªn ®Êu
+	-- ChuyÓn c¸c khai b¸o cÊu h×nh kü n¨ng vÒ th­ môc Skill, tr¸nh t×nh tr¹ng xung ®ét kh«ng hiÓn thŞ thuéc tİnh kü n¨ng
+	-- Hñy bá chuyÓn ng­êi ch¬i vÒ ph¸i vµ Set ®iÓm l­u r­¬ng map m«n ph¸i mçi khi t©n thñ gia nhËp ph¸i
+	-- Skill: C¬ b¶n ®· ®­a toµn bé c¸c kü n¨ng cña 10 ph¸i vÒ thêi tr­íc khi xuÊt hiÖn phiªn b¶n ThÊt thµnh ®¹i chiÕn, V« h×nh ®éc nay sÏ g©y ra l­îng s¸t th­¬ng kh«ng ®¸ng kÓ nh­ tr­íc
+	-- T¨ng c¸c chØ sè tû lÖ Ğp ®å phæ thµnh c«ng lªn, fix lçi kh«ng thÓ Ğp ®­îc m¶nh nh­ng vÉn mÊt nguyªn vËt liÖu atlas_compound.txt cét BD
+	-- Xãa bá toµn bé c¸c settings drop cña Boss Hoµng kim, phong l¨ng ®é ®­a vÒ d¹ng Drop Script nh»m t¨ng kh¶ n¨ng tïy biÕn r¬i vËt phÈm
+	-- Ng­êi ch¬i giÕt ®­îc Boss Hoµng kim nay sÏ kh«ng n»m trong danh s¸ch nhËn ®­îc phÇn th­ëng khi ®øng xung quanh khi boss chÕt n÷a
+	-- C¸c ho¹t ®éng nhËn ®­îc c¸c ®å phæ hoµng kim vµ nguyªn liÖu, ...: S¨n boss hoµng kim, phong l¨ng ®é, v­ît ¶i, m¹c b¾c th¶o nguyªn, viªm ®Õ, phong háa liªn thµnh
+	-- Cã thÓ tïy ı chØnh söa cho phĞp r¬i c¸c ®å phæ hoÆc c¸c nguyªn liÖu cho Ğp ®å trong c¸c ho¹t ®éng ë fie Config
+	-- Gi¶m tæng thÓ s¸t th­¬ng, kh¸ng cña c¸c NPCs: Qu¸i ë M¹c b¾c th¶o nguyªn, BÕn thuyÒn Phong l¨ng ®é, V­ît ¶i (Th¸ch thøc thêi gian), Viªm ®Õ, Phong kú täa ®é, Phong háa liªn thµnh
+	-- Söa lçi ng­êi ch¬i bŞ chÕt trong b¶n ®å phong kú täa ®é kh«ng thÓ dïng c¸c lo¹i phï vµ thay ®æi PK, t¹o team, ...
+	-- Phong kú täa ®é nay nÕu ng­êi ch¬i cßn trong map nhiÖm vô khi kh«ng ph¶i thêi gian mµ tiÕp cËn täa ®é hoÆc ®¸nh chÕt qu¸i sÏ ®­îc ®­a vÒ thµnh
+	-- Thªm Shop mÆt n¹ b»ng tiÒn v¹n chç ThÇn bİ th­¬ng nh©n d­¬ng ch©u
+	-- HiÖn t¹i cã thÓ cÊu h×nh cho phĞp chÕ t¹o trang bŞ huyÒn tinh(Tİm) t¹i thî rÌn thµnh thŞ trong file config tæng cña sv, nÕu kh«ng cho phĞp sÏ kh«ng thÓ tiÕn hµnh chÕ t¹o
+	-- CÊu h×nh l¹i Combo trang bŞ m«n ph¸i, nay mçi bé trang bŞ chØ cßn 3 mãn cã thÓ Ğp b»ng ®å phæ
+	-- Thay ®æi Res cña trang bŞ vò khİ trÊn ph¸i thµnh res cña vò khİ Minh ph­îng, spr trong updatejx13 vµ updatejx14
+	-- Liªn ®Êu 2 ngµy cuèi tuÇn nay sÏ b¾t ®Çu tõ 18h ®Õn 19h vµ tõ 19h ®Õn 20h t¸m trËn, thêi gian thi ®Êu tõ ®Êu ®Õn cuèi th¸ng, trõ 2 ngµy cuèi nghØ ®Ó nhËn th­ëng, tæng tr©n nay ®­îc n©ng lªn thµnh 120
+	-- NhËn th­ëng thêi gian Online nay sÏ th­ëng thªm l­îng kinh nghiÖm t­¬ng øng víi c¸c mèc thêi gian
+	-- Thªm shop b¸n bİ kİp m«n ph¸i chç ThÇn bİ th­¬ng nh©n T­¬ng D­¬ng - 50 ®iÓm phóc duyªn cho mçi cuèn
+	-- Fix l¹i lçi mçi khi ng­êi ch¬i ñy th¸c ®¨ng nhËp l¹i kh«ng mÊt thêi gian Online
+	-- File Server Config nay cã thªm tİnh n¨ng tïy chØnh khu vùc t¹o nh©n vËt míi, c¸c NPC sÏ tù ®éng ®­îc thªm vµo khi khai b¸o tİnh n¨ng nµy, ng­êi ch¬i míi t¹o nh©n vËt sÏ ®­îc ®­a ®Õn khu vùc ®­îc khai b¸o
+	-- Ng­êi ch¬i nay sÏ ®­îc g¸n hµm OnTimer kiÓm tra theo thêi gian cÊu h×nh bao gåm: l­u th«ng tin ng­êi ch¬i vµo m¸y chñ, kiÓm tra tr¹ng th¸i chiÕn ®Êu, kiÓm tra danh hiÖu. CÊu h×nh trong file ServerConfig
+
+
+[[ Version 1 _S¬n Hµ X· T¾c (Trang bŞ Tİm) ]]
+	-- NhiÖm vô s¸t thñ: ®­a ng­êi ®Õn n¬i lµm NV vµ chØnh l¹i DropBoss
+	-- ThuyÒn Phong l¨ng ®é: t¨ng NPC vµ tØ lÖ Drop, add  thªm drop §å phæ vµo Goldennpc vµ creep
+	-- Map M¹c b¾c th¶o nguyªn: Drop l¹i c¸c lo¹i nguyªn kho¸n vµ Exp
+	-- T¾t chøc n¨ng ñy th¸c rêi m¹ng, ®Ó l¹i chøc n¨ng ñy th¸c b¸n hµng miÔn phİ
+	-- Söa l¹i NPC thî rÌn thÇn bİ L©m an, ®Ó l¹i chøc n¨ng hîp thµnh trang bŞ Hoµng Kim
+	-- R¬i ®å phæ trang bŞ hoµng kim ë: Boss vµ creep thuyÒn phong l¨ng ®é, Boss Hoµng Kim, V­ît ¶i
+	-- R¬i c¸c lo¹i nguyªn kho¸n ë: Boss Hoµng Kim, Phong l¨ng ®é t©y, M¹c b¾c th¶o nguyªn, Boss vµ creep thuyÒn phong l¨ng ®é, creep v­ît ¶i, mua ë Qu©n nhu quan(TK)
+	-- NPC hµng rong: ®Ó l¹i Shop tinh th¹ch
+	-- chøc n¨ng chÕ t¹o trang bŞ tİm vµ hoµng kim
+	-- NPC Kim S¬n ch­ëng m«n nh©n: thµnh lËp bang héi, viÖt hãa xa phu hoa s¬n
+	-- NPC TiÒn trang t¹i c¸c thµnh thŞ, chØ sè quy ®æi 1 KNB = 20 T§
+	-- v« hiÖu file: [script\activitysys\g_npcdeath.lua] tr¸nh rít c¸c vËt phÈm ko râ nguyªn nh©n vµ tr¸nh ph¸t sinh lçi bad_alloc
+	-- tØ lÖ r¬i ®å trªn Boss Hoµng Kim: §å phæ Hoµng kim, nguyªn kho¸n, lé, tŞch, phóc duyªn, thñy tinh
+	-- tói ngùa 8x vµo Kú tr©n c¸c
+	-- Add thªm c¸c SkillState 451 khi tham gia c¸c ho¹t ®éng: Th¾ng trËn liªn ®Êu, c«ng thµnh chiÕn
+	-- Nam nh¹c trÊn (xãa chøc n¨ng b¸n ngùa 8x ë thÈm c©u), D­¬ng ch©u (xãa chøc n¨ng thÇn bİ th­¬ng nh©n), xãa chøc n¨ng chÕ t¹o hçn linh nguyªn lé ë c¸c tiÖm thuèc
+	-- ViÖt hãa l¹i c¸c Map: BiÖn kinh, Nam nh¹c trÊn, D­¬ng ch©u, Thµnh ®«, §¹i lı, M¹c b¾c th¶o nguyªn, §µo hoa nguyªn, §µo hoa ®¶o
+	-- Edit l¹i ®¹i lao, ®Çu thó kh«ng bŞ thu tiÒn, cã thÓ hèi lé Lao ®Çu ra ngoµi vµ xãa bá PK
+	-- Xãa c¸c NPC kh«ng cÇn thiÕt, lÊy NPC ChiÕn t©n t«n gi¶ lµm NPC T©n Thñ Quan
+	-- Boss Hoµng Kim (9h, 14h vµ 21h): t¾t th«ng b¸o AddLocalNews/1 khi boss HK xuÊt hiÖn, chØ th«ng b¸o 1 lÇn.
+	-- Qu¶ Huy Hoµng & HK: Read file\settings\maps\great_night\Äõ¸ú¶´·Ô¹¬.txtFailed in function 'Global_GreatSeedExecute()', fix l¹i th«ng b¸o Msg2SubWorld chØ 1 lÇn lóc 12h
+	-- Qu¶ hoµng kim ¨n vµo nay sÏ ®­îc 20tr Exp
+	-- Edit l¹i Shop: Liªn ®Êu(thªm Ngùa [Liªn ®Êu] B«n tiªu 50k point), Phóc duyªn(xãa thñy tinh, tinh hång, thªm c¸c hoa hång), Tèng Kim(thªm c¸c *hoµn, nguyªn kho¸n)
+	-- NPC ThÇn bİ th­¬ng nh©n: T­¬ng d­¬ng Shop 93, L©m An t¹m thêi xãa, D­¬ng ch©u t¹m thêi xãa
+	-- NPC Qu©n nhu quan: ViÖt hãa l¹i, xãa shop cò, add shop míi, th­ëng V« song m·nh t­íng nay chØ cßn 40tr 30tr 20tr Exp vµ 3 Danh hiÖu cho 3 top
+	-- Danh hiÖu: ViÖt hãa l¹i, thªm 4 Danh hiÖu míi(V« song m·nh t­íng: §¹i t­íng, phã t­íng, thèng lÜnh vµ GAME MASTER) cho Top Tèng Kim
+	-- HÖ thèng Danh hiÖu cho c¸c Tİnh n¨ng: Tèng Kim( 7 ngµy: V« song m·nh t­íng: §¹i t­íng, phã t­íng, thèng lÜnh)
+	-- NPC ThÈm cöu - Ba l¨ng huyÖn: Nay sÏ cã chøc n¨ng më réng r­¬ng thø 2, thø 3, thø 4. gi¸ tiÒn ®ång: 2 = 20, 3 = 40, 4 = 80
+	-- Tèng Kim: nay sÏ th­ëng 1 Tèng Kim lÔ bao dµnh cho 3 ng­êi mçi rank vµ ®iÓm lín h¬n 8k, 1 mÆt n¹ ®¹i t­íng cho top 1/rank, giÕt ®­îc nguyªn so¸i sÏ nhËn random tèng kim lÔ bao
+	-- Tèng Kim: ®æi ®iÓm tİch lòy mçi ®iÓm Tk sÏ nh©n víi [1234.5679] ®iÓm kinh nghiÖm, 3 ng­êi xÕp h¹ng cao nhÊt cña tuÇn tr­íc, tuÇn sau sÏ nhËn ®c danh hiÖu
+	-- Hç trî t©n thñ: [T©n thñ quan] Tiªn th¶o lé x8, M¶nh s¬n hµ x· t¾c x1000, Håi thµnh phï (nhá), CÈm nang ®ång hµnh, ThÇn hµnh phï, hoa hång, ph¸o hoa
+	-- Hñy bá hÖ thèng ®iÓm n¨ng ®éng: [ \script\huoyuedu\*.lua], [\settings\huoyuedu\huoyuedu.txt]
+	-- Xãa bá toµn bé c¸c trang bŞ hoµng kim [GoldEquip.txt], gi÷ l¹i: An Bang, §Şnh Quèc, Nhu T×nh, HiÖp Cèt, Kim Phong, Thiªn Hoµng
+	-- ChÕ t¹o Trang bŞ hoµng kim Nhu T×nh, HiÖp Cèt nay sÏ chÕ t¹o trùc tiÕp t¹i NPC Thî rÌn t¹i c¸c thµnh thŞ, vËt 1iÖu c¸c m¶nh bæ thiªn th¹ch mua t¹i Kú tr©n c¸c
+	-- Xãa dßng ch÷ §å Phæ Hoµng Kim ë c¸c trang bŞ hîp thµnh b»ng ®å phæ
+	-- Thªm Kim Nguyªn B¶o vµo Kú Tr©n C¸c
+	-- Fix l¹i [Tiªn Th¶o Lé] nay ch­a hÕt thêi gian chÕt kh«ng mÊt t¸c dông, nh­ng tho¸t game vÉn mÊt t¸c dông
+	-- Fix lçi khi nh©n vËt ®ang offline live dïng lÖnh bµi qu¶n lı nh©n vËt bŞ treo Server, add thªm file th«ng b¸o khi nh©n vËt online [bil4i3n_login.lua]
+	-- ViÖt hãa toµn bé Map cña thËp ®¹i ph¸i theo chuÈn cña VNG
+	-- [_]Fix lçi lóc t¹o nh©n vËt míi vµo game nhËn vò khİ kh«ng hiÖn tiÕng viÖt -> ®ång bé th­ môc: Settings/item/002
+	-- [_]hñy bá hÖ thèng nhiÖm vô skill 150 180 cña thËp ®¹i ph¸i -> ®ãng Map: NguyÖt Ca §¶o
+	-- Bµy b¸n: cã thÓ bµy b¸n c¹nh NPC
+	-- Xãa c¸c ®iÓm NPC kh«ng liªn quan träng MINIMAP: ®ång bé file "settings/maptraffic.ini"
+	-- TiÒn Trang: Nay lÊy TiÒn ®ång sÏ khãa vÜnh viÔn, ®æi KNB sang TiÒn ®ång sÏ khãa vÜnh viÔn -> kh«ng sö dông TiÒn ®ång ®Ó giao dŞch, vËt phÈm mua b»ng tiÒn ®ång kh«ng khãa.
+	-- T¨ng thêi gian tån t¹i skill håi m¸u(472) lªn 600 phót, 150 ®¬n vŞ/1 lÇn, xãa hiÖu øng h×nh mµu vµng trªn ®Çu nh©n vËt, kh«ng cho phĞp dïng ë Liªn ®Êu, ChiÕn tr­êng, C«ng thµnh
+	-- HiÖu øng Hç trî håi m¸u, n¨ng l­îng sÏ bŞ xãa bá nÕu tån t¹i trªn nh©n vËt khi vµo c¸c MAP: Liªn ®Êu, ChiÕn tr­êng, C«ng thµnh
+	-- §èi tho¹i víi GameMaster trong Game, tin nh¾n ®Çu tiªn tõ gamer nÕu vµo xem th«ng tin nh©n vËt vµ tr¶ lêi l¹i gamer sÏ ko nhËn ®c tin nh¾n, ph¶i tr¶ lêi tin nh¾n ®Çu tiªn
+	-- Phong kú täa ®é nay chØ cho phĞp tham gia vµo c¸c giê ch½n trong ngµy, kÕt thóc thêi gian vÉn ch­a kİch toµn bé ng­êi ch¬i ra khái map.
+	-- CÈm Nang §ång Hµnh, T©n thñ quan
+	-- xuÊt s­ vµ vµo l¹i m«n ph¸i t¹i NPC ch­ëng m«n nh©n ë ThËp ®¹i m«n ph¸i
+	-- §æi tªn nh©n vËt t¹i NPC Hoµnh ba tiªn tö, mçi lÇn ®æi tªn ph¶i mÊt thªm 1 KNB
+	-- Thªm ThiÕt la h¸n vµo KTC, bÊt kÓ nh©n vËt ®ang ë cÊp ®é nµo ®Òu cã thÓ sö dông kh«ng giíi h¹n ®½ng cÊp
+	-- ChuyÓn ®æi m«n ph¸i t¹i NPC Hoµnh ba tiªn tö, mçi lÇn tèn 1 Tİn vËt m«n ph¸i, cã thÓ gia nhËp vµo bÊt cø m«n ph¸i nµo kh«ng giíi h¹n giíi tİnh vµ ngò hµnh
+	-- ChuyÓn ®æi giíi tİnh, nh©n vËt chuyÓn ®æi cÇn thªm 1 KNB cho 1 lÇn míi, mäi thø liªn quan ®Òu ®­îc gi÷ nguyªn
+	-- cËp nhËt h¹ng cao thñ thÕ giíi, cao thñ phó hé vµ cao thñ m«n ph¸i, nhËn th­ëng vµo thø hai mçi tuÇn
+	-- XuÊt s­ xuèng nói hµnh tÈu giang hå kh«ng bŞ xãa bá m«n ph¸i n÷a, lÊy c¨n cø lµm xÕp h¹ng m«n ph¸i vµ c¸c tİnh n¨ng cã liªn quan ®Õn m«n ph¸i
+	-- ChØnh söa thªm c¸c môc míi l¹i b¶ng xÕp h¹ng tæng, nay sÏ ®­îc cËp nhËt vµo lóc member tho¸t khái game vµ khi dïng lÖnh b¶o tr× server [shutdown]
+	-- §iÓm danh h»ng ngµy, mçi ngµy sÏ ®c ®iÓm danh 1 lÇn, phÇn th­ëng phong phó, nÕu kh«ng ®iÓm danh h«m tr­íc h«m sau cã thÓ bï b»ng Tö TT
+	-- D· tÈu nay sÏ cã thªm lùa chän hoµn thµnh ngay nhiÖm vô, mçi lÇn tèn 1 tiÒn ®ång, cËp nhËt thªm b¶ng xÕp h¹ng sè lÇn hoµn thµnh nhiÖn vô d· tÈu
+	-- T¨ng tèc ®é luyÖn kü n¨ng 9x cña c¸c ph¸i lªn 100, mÆc ®Şnh lµ 2
+	-- b¶ng xÕp h¹ng thêi gian online, chøc n¨ng online nhËn th­ëng, h¹ng thu thËp khiªu chiÕn lÖnh
+	-- Phong Háa Liªn Thµnh, thêi gian b¸o danh 20 phót, c¸c vËt phÈm r¬i ra tõ qu¸i phong phó, më c¸c ngµy thø 4, 6, chñ nhËt trong tuÇn 9h vµ 21h
+	-- Hoa s¬n ®¹i chiÕn: thêi gian b¸o danh vµo 10h15 vµ 21h15 thø 3, thø 5 vµ thø 7 h»ng tuÇn
+	-- S¨n Nhİm bĞo ph×, xuÊt hiÖn lóc 11h10 vµ 22h30 mçi ngµy giíi h¹n 10 con, mçi con 2tr EXP 2 v¹n l­îng
+	-- Tİnh n¨ng Viªm ®Õ b¶o tµng, ho¹t ®éng tõ 14 giê 25 ®Õn 22 giê 25 víi l­îng kinh nghiÖm cùc lín vµ c¸c vËt phÈm cùc kú cã gi¸ trŞ
+	-- Thay ®æi ngo¹i h×nh trang bŞ t¹i chç cña NPC Hoµnh ba tiªn tö, mçi lÇn dung luyÖn sÏ tiªu tèn 3 TiÒn ®ång
+	-- Thªm Thø h¹ng giang hå trong b¶ng thèng kª xÕp h¹ng tæng, danh s¸ch c¸c cao thñ ®­îc nhËn vßng s¸ng ®Çu tuÇn sÏ ®­îc th­c hiÖn lÊy tù ®éng.
+	-- Xãa Item Tiªn th¶o lé §Æc biÖt trong  Shop [2139]
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

@@ -1,0 +1,209 @@
+IncludeLib("SETTING")
+Include("\\script\\dailogsys\\dailogsay.lua")
+Include("\\script\\lib\\awardtemplet.lua")
+Include("\\script\\global\\fuyuan.lua")
+Include("\\script\\traogiaithdnb\\thdnb7.lua")
+Include("\\script\\missions\\leaguematch\\npc\\officer.lua")
+Include("\\script\\vng_event\\2012_vlnb\\main.lua")
+Include("\\script\\global\\lottery_gold.lua")
+Include("\\script\\GM_Tool\\dispose_item.lua");
+Include("\\script\\lib\\awardtemplet.lua")
+Include("\\script\\bonus_onlinetime\\func_onlineaward.lua")
+Include("\\script\\event\\superplayeract2007\\event.lua")
+Include("\\script\\event\\zhongqiu2007\\item\\yuebinglihe.lua")
+Include("\\script\\vng_feature\\resetbox.lua")
+Include("\\script\\missions\\dangboss\\npcdailog.lua")
+IncludeLib("ITEM")
+Include("\\script\\lib\\progressbar.lua")
+Include("\\script\\tong\\tong_award_head.lua");
+Include("\\script\\item\\huihuangzhiguo_advance.lua")
+Include("\\script\\activitysys\\g_activity.lua")
+IncludeLib("TASKSYS");
+
+
+
+function main(nItemIndex)
+	local nSilverCount = CalcEquiproomItemCount(4,417,1,1) ;
+	if(nSilverCount < 1) then
+		Say("KaKaKa ®¹i hiÖp cÇn cã Ýt nhÊt 1xu trong hµnh trang míi ®­îc sö dông cóp! ",0)
+	return 1
+                                                                                  end 
+batdaukhuicup()	
+end
+
+
+function batdaukhuicup()
+ConsumeEquiproomItem(1,4,417,1,1)
+AddExtPoint(4,1)
+local s = random(1,9)
+local nGoldPoint = GetExtPoint(4)
+
+if nGoldPoint == 50 then
+tbAwardTemplet:GiveAwardByList({{szName="Tói M¸u",tbProp={6,1,4422,1,1,0,0},nCount=1,nExpiredTime=10080},}, "test", 1);
+local szNews = format("Chóc mõng ®¹i hiÖp <color=green>"..GetName().."<color=cyan> nhËn ®­îc tói m¸u tèng kim <color=yellow>Khi §¹t mèc 50 chiÕc Cup<pic=177>");
+AddGlobalNews(szNews);
+LG_ApplyDoScript(1, "", "", "\\script\\event\\msg2allworld.lua", "battle_msg2allworld", szNews , "", "");
+end;
+
+if nGoldPoint == 100 then
+tbAwardTemplet:GiveAwardByList({{szName="Phiªn Vò",tbProp={0,10,7,1,0,0,0},nCount=1,nExpiredTime=10080},}, "test", 1);
+local szNews = format("Chóc mõng ®¹i hiÖp <color=green>"..GetName().."<color=cyan> nhËn ®­îc 1 phiªn vò 7 ngµy <color=yellow>Khi §¹t mèc 100 chiÕc Cup.<pic=177>");
+AddGlobalNews(szNews);
+LG_ApplyDoScript(1, "", "", "\\script\\event\\msg2allworld.lua", "battle_msg2allworld", szNews , "", "");
+end;
+
+if nGoldPoint == 150 then
+matna()
+end;
+
+if nGoldPoint == 151 then
+PayExtPoint(4,150)
+end;
+
+
+if s==1 then
+tbAwardTemplet:GiveAwardByList({szName = "§iÓm Kinh NghiÖm", nExp=1000000000}, "test", 1);
+end;
+if s==2 then
+AddItem(6,1,123,1,1,0,0)
+end;
+if s==3 then
+AddItem(6,1,122,1,1,0,0)
+end;
+if s==4 then
+tbAwardTemplet:GiveAwardByList({szName = "§iÓm Kinh NghiÖm", nExp=1000000000}, "test", 1);
+
+end;
+if s==5 then
+AddItem(4,239,1,1,0,0,0)
+end;
+if s==6 then
+AddItem(6,1,73,1,1,0,0)
+end;
+if s==7 then
+tbAwardTemplet:GiveAwardByList({szName = "§iÓm Kinh NghiÖm", nExp=1000000000}, "test", 1);
+
+end;
+if s==8 then
+AddItem(6,1,12,1,1,0,0)
+end;
+if s==9 then
+tbAwardTemplet:GiveAwardByList({szName = "§iÓm Kinh NghiÖm", nExp=1000000000}, "test", 1);
+end;
+end
+
+
+
+		
+
+
+-----------------------------------------------------MENU---------------------------------
+
+function matna()
+	local tbDialog = 
+{ 
+"<color=green>®¹i hiÖp h·y chän phÇn quµ nh­ sau xin h·y chän lùa kü cµng.",
+"MÆt N¹ Vâ §ang/MNVD",
+"MÆt N¹ C«n L«n/MNCL",
+"MÆt N¹ Thiªn NhÉn/MNTN",
+"MÆt N¹ C¸i Bang/MNCB",
+"MÆt N¹ Nga Mi/MNNM",
+"Trang kÕ/matna2",
+} 
+CreateTaskSay(tbDialog)
+end
+
+function matna2()
+	local tbDialog = 
+{ 
+"<color=green>®¹i hiÖp h·y chän phÇn quµ nh­ sau xin h·y chän lùa kü cµng.",
+"MÆt N¹ Thóy Yªn/MNTY",
+"MÆt N¹ Thiªn V­¬ng/MNTV",
+"MÆt N¹ ThiÕu L©m/MNTL",
+"MÆt N¹ §­êng M«n/MNDM",
+"MÆt N¹ Ngò §éc/MNND",
+"Trang tr­íc/matna",
+} 
+CreateTaskSay(tbDialog)
+end
+
+function MNVD()
+tbAwardTemplet:GiveAwardByList({{szName="MÆt N¹",tbProp={0,11,829,1,0,0,0},nCount=1,nExpiredTime=21600},}, "test", 1);
+tbAwardTemplet:GiveAwardByList({{szName="Hoµn Mü",tbProp={0,random(424,427)},nCount=1,nQuality = 1,},}, "test", 1);
+local szNews = format("Chóc mõng ®¹i hiÖp <color=green>"..GetName().."<color=cyan> nhËn mÆt n¹ Vâ §ang + Cùc PhÈm An Bang Hoµng Mü Maxop VÜnh viÔn<color=yellow> Khi §¹t mèc 150 chiÕc Cup.<pic=177>");
+AddGlobalNews(szNews);
+LG_ApplyDoScript(1, "", "", "\\script\\event\\msg2allworld.lua", "battle_msg2allworld", szNews , "", "");
+end;
+
+function MNCL()
+tbAwardTemplet:GiveAwardByList({{szName="MÆt N¹",tbProp={0,11,830,1,0,0,0},nCount=1,nExpiredTime=21600},}, "test", 1);
+tbAwardTemplet:GiveAwardByList({{szName="Hoµn Mü",tbProp={0,random(424,427)},nCount=1,nQuality = 1,},}, "test", 1);
+local szNews = format("Chóc mõng ®¹i hiÖp <color=green>"..GetName().."<color=cyan> nhËn mÆt n¹ C«n L«n + Cùc PhÈm An Bang Hoµng Mü Maxop VÜnh viÔn<color=yellow> Khi §¹t mèc 150 chiÕc Cup.<pic=177>");
+AddGlobalNews(szNews);
+LG_ApplyDoScript(1, "", "", "\\script\\event\\msg2allworld.lua", "battle_msg2allworld", szNews , "", "");
+end;
+
+function MNTN()
+tbAwardTemplet:GiveAwardByList({{szName="MÆt N¹",tbProp={0,11,831,1,0,0,0},nCount=1,nExpiredTime=21600},}, "test", 1);
+tbAwardTemplet:GiveAwardByList({{szName="Hoµn Mü",tbProp={0,random(424,427)},nCount=1,nQuality = 1,},}, "test", 1);
+local szNews = format("Chóc mõng ®¹i hiÖp <color=green>"..GetName().."<color=cyan> nhËn mÆt n¹ Thiªn NhÉn + Cùc PhÈm An Bang Hoµng Mü Maxop VÜnh viÔn<color=yellow> Khi §¹t mèc 150 chiÕc Cup.<pic=177>");
+AddGlobalNews(szNews);
+LG_ApplyDoScript(1, "", "", "\\script\\event\\msg2allworld.lua", "battle_msg2allworld", szNews , "", "");
+end;
+
+function MNCB()
+tbAwardTemplet:GiveAwardByList({{szName="MÆt N¹",tbProp={0,11,832,1,0,0,0},nCount=1,nExpiredTime=21600},}, "test", 1);
+tbAwardTemplet:GiveAwardByList({{szName="Hoµn Mü",tbProp={0,random(424,427)},nCount=1,nQuality = 1,},}, "test", 1);
+local szNews = format("Chóc mõng ®¹i hiÖp <color=green>"..GetName().."<color=cyan> nhËn mÆt n¹ C¸i Bang + Cùc PhÈm An Bang Hoµng Mü Maxop VÜnh viÔn<color=yellow> Khi §¹t mèc 150 chiÕc Cup.<pic=177>");
+AddGlobalNews(szNews);
+LG_ApplyDoScript(1, "", "", "\\script\\event\\msg2allworld.lua", "battle_msg2allworld", szNews , "", "");
+end;
+
+function MNNM()
+tbAwardTemplet:GiveAwardByList({{szName="MÆt N¹",tbProp={0,11,833,1,0,0,0},nCount=1,nExpiredTime=21600},}, "test", 1);
+tbAwardTemplet:GiveAwardByList({{szName="Hoµn Mü",tbProp={0,random(424,427)},nCount=1,nQuality = 1,},}, "test", 1);
+local szNews = format("Chóc mõng ®¹i hiÖp <color=green>"..GetName().."<color=cyan> nhËn mÆt n¹ Nga Mi + Cùc PhÈm An Bang Hoµng Mü Maxop VÜnh viÔn<color=yellow> Khi §¹t mèc 150 chiÕc Cup.<pic=177>");
+AddGlobalNews(szNews);
+LG_ApplyDoScript(1, "", "", "\\script\\event\\msg2allworld.lua", "battle_msg2allworld", szNews , "", "");
+end;
+
+function MNTY()
+tbAwardTemplet:GiveAwardByList({{szName="MÆt N¹",tbProp={0,11,834,1,0,0,0},nCount=1,nExpiredTime=21600},}, "test", 1);
+tbAwardTemplet:GiveAwardByList({{szName="Hoµn Mü",tbProp={0,random(424,427)},nCount=1,nQuality = 1,},}, "test", 1);
+local szNews = format("Chóc mõng ®¹i hiÖp <color=green>"..GetName().."<color=cyan> nhËn mÆt n¹ Thïy Yªn + Cùc PhÈm An Bang Hoµng Mü Maxop VÜnh viÔn<color=yellow> Khi §¹t mèc 150 chiÕc Cup.<pic=177>");
+AddGlobalNews(szNews);
+LG_ApplyDoScript(1, "", "", "\\script\\event\\msg2allworld.lua", "battle_msg2allworld", szNews , "", "");
+end;
+
+function MNTV()
+tbAwardTemplet:GiveAwardByList({{szName="MÆt N¹",tbProp={0,11,835,1,0,0,0},nCount=1,nExpiredTime=21600},}, "test", 1);
+tbAwardTemplet:GiveAwardByList({{szName="Hoµn Mü",tbProp={0,random(424,427)},nCount=1,nQuality = 1,},}, "test", 1);
+local szNews = format("Chóc mõng ®¹i hiÖp <color=green>"..GetName().."<color=cyan> nhËn mÆt n¹ Thiªn V­¬ng + Cùc PhÈm An Bang Hoµng Mü Maxop VÜnh viÔn<color=yellow> Khi §¹t mèc 150 chiÕc Cup.<pic=177>");
+AddGlobalNews(szNews);
+LG_ApplyDoScript(1, "", "", "\\script\\event\\msg2allworld.lua", "battle_msg2allworld", szNews , "", "");
+end;
+
+function MNTL()
+tbAwardTemplet:GiveAwardByList({{szName="MÆt N¹",tbProp={0,11,836,1,0,0,0},nCount=1,nExpiredTime=21600},}, "test", 1);
+tbAwardTemplet:GiveAwardByList({{szName="Hoµn Mü",tbProp={0,random(424,427)},nCount=1,nQuality = 1,},}, "test", 1);
+local szNews = format("Chóc mõng ®¹i hiÖp <color=green>"..GetName().."<color=cyan> nhËn mÆt n¹ ThiÕu L©m + Cùc PhÈm An Bang Hoµng Mü Maxop VÜnh viÔn<color=yellow> Khi §¹t mèc 150 chiÕc Cup.<pic=177>");
+AddGlobalNews(szNews);
+LG_ApplyDoScript(1, "", "", "\\script\\event\\msg2allworld.lua", "battle_msg2allworld", szNews , "", "");
+end;
+
+function MNDM()
+tbAwardTemplet:GiveAwardByList({{szName="MÆt N¹",tbProp={0,11,837,1,0,0,0},nCount=1,nExpiredTime=21600},}, "test", 1);
+tbAwardTemplet:GiveAwardByList({{szName="Hoµn Mü",tbProp={0,random(424,427)},nCount=1,nQuality = 1,},}, "test", 1);
+local szNews = format("Chóc mõng ®¹i hiÖp <color=green>"..GetName().."<color=cyan> nhËn mÆt n¹ §­êng M«n + Cùc PhÈm An Bang Hoµng Mü Maxop VÜnh viÔn<color=yellow> Khi §¹t mèc 150 chiÕc Cup.<pic=177>");
+AddGlobalNews(szNews);
+LG_ApplyDoScript(1, "", "", "\\script\\event\\msg2allworld.lua", "battle_msg2allworld", szNews , "", "");
+end;
+
+function MNND()
+tbAwardTemplet:GiveAwardByList({{szName="MÆt N¹",tbProp={0,11,838,1,0,0,0},nCount=1,nExpiredTime=21600},}, "test", 1);
+tbAwardTemplet:GiveAwardByList({{szName="Hoµn Mü",tbProp={0,random(424,427)},nCount=1,nQuality = 1,},}, "test", 1);
+local szNews = format("Chóc mõng ®¹i hiÖp <color=green>"..GetName().."<color=cyan> nhËn mÆt n¹ Ngò §éc + Cùc PhÈm An Bang Hoµng Mü Maxop VÜnh viÔn<color=yellow> Khi §¹t mèc 150 chiÕc Cup.<pic=177>");
+AddGlobalNews(szNews);
+LG_ApplyDoScript(1, "", "", "\\script\\event\\msg2allworld.lua", "battle_msg2allworld", szNews , "", "");
+end;
+

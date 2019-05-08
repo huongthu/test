@@ -1,0 +1,103 @@
+IncludeLib("ITEM")
+IncludeLib("LEAGUE")
+Include("\\script\\lib\\progressbar.lua")
+Include("\\script\\activitysys\\g_activity.lua")
+
+NPC_Clicktk1 = {
+	{1986,80,4,380,1571,3198,0,"Háa DiÖm",0,"\\script\\global\\quanlygame\\sukien\\tongkim\\tranhdoat\\nhantieutong.lua","main", 0}, 
+  
+}
+NPC_Clicktk2 = {
+	{1986,80,4,380,1332,3444,0,"Háa DiÖm",0,"\\script\\global\\quanlygame\\sukien\\tongkim\\tranhdoat\\nhantieutong.lua","main", 0}, 
+  
+}
+
+NPC_Clicktk3 = {
+	{1171,80,4,380,1537,3234,0,"Kho Binh KhÝ",0,"\\script\\global\\quanlygame\\sukien\\tongkim\\tranhdoat\\tong.lua","main", 0}, 
+  
+}
+NPC_Clicktk4 = {
+	{1171,80,4,380,1354,3417,0,"Kho Binh KhÝ",0,"\\script\\global\\quanlygame\\sukien\\tongkim\\tranhdoat\\tong.lua","main", 0},   
+  
+}
+
+function ADDtieuok1()
+	call_npctk(NPC_Clicktk1)
+	call_npctk(NPC_Clicktk2)
+
+end
+
+function ADDtieuok2()
+	call_npctk(NPC_Clicktk3)
+	call_npctk(NPC_Clicktk4)
+
+end
+
+function call_npctk(tbnpc) 
+		for i = 1 , getn(tbnpc) do 
+			Mid = SubWorldID2Idx(tbnpc[i][4]); 
+			if (Mid >= 0 ) then 
+				TabValue5 = tbnpc[i][5] * 32; 
+				TabValue6 = tbnpc[i][6] * 32; 
+				local nNpcIdx = AddNpc(tbnpc[i][1],tbnpc[i][2],Mid,TabValue5,TabValue6,tbnpc[i][7],tbnpc[i][8]); 
+				SetNpcScript(nNpcIdx, tbnpc[i][10]); 
+                                                                                                                                                                                                                                                                                                                                          AddTimer(600* 18, "OnTimeout", nNpcIdx);
+			end; 
+	end; 
+end
+
+
+
+function main()
+	local nNpcIdx = GetLastDiagNpc();
+	if GetCamp() == 0 then
+                                                                                  Talk(1,"","<color=cyan>Gian tÕ qu©n kim µ ch¾c ng­¬i muèn chÕt.")
+		return
+	end
+bienhinhtong()
+end
+
+
+function bienhinhtong()
+local nNpcIdx = GetLastDiagNpc();
+if GetCamp() == 1 then
+ChangeOwnFeature(0,0,1903);
+ForbitSkill(1);
+SetMoveSpeed(4);
+AddSkillState(464, 30, 0, 18*2000);
+AddSkillState(729, 20, 0, 18*2000); --CHIM
+AddSkillState(739, 20, 0, 18*2000); --CHIM
+AddSkillState(313, 60, 0, 18*2000); --TANHINH
+AddSkillState(458, 60, 0, 18*2000); --TANHINH
+AddSkillState(874, 1, 0, 18*2000); --BAYMAU
+AddSkillState(764, 1, 0, 18*180); --BAYMAU
+SetProtectTime(18*100)
+local camtutong = format("C¶m tö qu©n Tèng <color=green>"..GetName().."<color=yellow> nhËn thµnh c«ng xe háa sa ®ang tiÕn vÒ doanh tr¹i Kim Qu©n..");
+AddGlobalNews(camtutong);
+LG_ApplyDoScript(1, "", "", "\\script\\event\\msg2allworld.lua", "battle_msg2allworld", camtutong, "", "")
+DelNpc(nNpcIdx)
+end
+local nNpcIdx = GetLastDiagNpc();
+if GetCamp() == 2 then
+ChangeOwnFeature(0,0,1903);
+ForbitSkill(1);
+SetMoveSpeed(4);
+AddSkillState(464, 30, 0, 18*2000);
+AddSkillState(739, 20, 0, 18*2000); --CHIM
+AddSkillState(729, 20, 0, 18*2000); --CHIM
+AddSkillState(313, 60, 0, 18*2000); --TANHINH
+AddSkillState(458, 60, 0, 18*2000); --TANHINH
+AddSkillState(980, 1, 0, 18*2000); --BAYMAU
+AddSkillState(764, 1, 0, 18*180); --BAYMAU
+SetProtectTime(18*100)
+local camtukim = format("C¶m tö qu©n Kim <color=green>"..GetName().."<color=yellow> nhËn thµnh c«ng xe háa sa ®ang tiÕn vÒ doanh tr¹i Tèng Qu©n.");
+AddGlobalNews(camtukim);
+LG_ApplyDoScript(1, "", "", "\\script\\event\\msg2allworld.lua", "battle_msg2allworld", camtukim, "", "")
+DelNpc(nNpcIdx)
+end
+end
+
+
+function OnTimeout(nNpcIndex)
+DelNpc(nNpcIndex)
+end
